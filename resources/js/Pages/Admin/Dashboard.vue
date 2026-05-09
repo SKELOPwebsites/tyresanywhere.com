@@ -1,6 +1,6 @@
 <template>
     <Head>
-        <title>Admin - Ace Tyres</title>
+        <title>Admin - Tyres Anywhere</title>
     </Head>
 
     <div id="home">

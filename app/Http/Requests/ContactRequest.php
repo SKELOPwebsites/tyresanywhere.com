@@ -22,28 +22,35 @@ class ContactRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => ['required', 'string'],
-            'last_name' => ['required', 'string'],
+            'name' => ['required', 'string'],
             'phone' => ['required', 'numeric'],
             'email' => ['required', 'email'],
-            'comments' => ['required', 'string', 'max:1000']
+            'postcode' => ['nullable', 'string'],
+            'subject' => ['required', 'string', 'max:1000'],
+            'body' => ['required', 'string', 'max:1000']
         ];
     }
 
     public function messages(): array
     {
         return [
-            'first_name.required' => 'Please enter a first name',
-            'first_name.string' => 'Please enter a valid first name',
-            'last_name.required' => 'Please enter a last name',
-            'last_name.string' => 'Please enter a valid last name',
+            'name.required' => 'Please enter a name',
+            'name.string' => 'Please enter a valid name',
+
             'phone.required' => 'Please enter a phone number',
             'phone.numeric' => 'Please enter a valid phone number',
+
             'email.required' => 'Please enter an e-mail address',
             'email.email' => 'Please enter a valid e-mail address',
-            'comments.required' => 'Please specify some details',
-            'comments.string' => 'Please enter valid details',
-            'comments.max:1000' => 'Details must be less than 1000 characters',
+
+            'postcode.string' => 'Please enter a valid postcode',
+
+            'subject.required' => 'Please enter a subject',
+            'subject.string' => 'Please enter a valid subject',
+
+            'body.required' => 'Please specify some details',
+            'body.string' => 'Please enter valid details',
+            'body.max:1000' => 'Details must be less than 1000 characters',
         ];
     }
 }

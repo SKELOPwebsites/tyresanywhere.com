@@ -11,6 +11,10 @@
 <script setup>
 import { ref } from "vue"
 
+defineExpose({
+    open,close
+})
+
 const isVisible = ref(false);
 
 function open() {
@@ -42,7 +46,8 @@ function close() {
     padding: 0.5rem;
     display: flex;
     align-items: center;
-    z-index: 1;
+    z-index: 100;
+    cursor: default;
 }
 
 .window {

@@ -55,7 +55,10 @@ module.exports = {
                 'montserrat': ['Montserrat', ...defaultTheme.fontFamily.sans]
             },
             gridTemplateColumns: {
-                '20': 'repeat(20, minmax(0, 1fr))',
+                '21': 'repeat(21, minmax(0, 1fr))',
+                '22': 'repeat(22, minmax(0, 1fr))',
+                '24': 'repeat(24, minmax(0, 1fr))',
+                '27': 'repeat(27, minmax(0, 1fr))',
             }
         },
     },

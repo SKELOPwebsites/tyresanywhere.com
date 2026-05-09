@@ -2,7 +2,7 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build && vite build --ssr"
     },
     "devDependencies": {
         "@stripe/stripe-js": "^1.46.0",
@@ -17,7 +17,9 @@
     "dependencies": {
         "@headlessui/vue": "^1.7.10",
         "@inertiajs/vue3": "^1.0.2",
+        "@vue/server-renderer": "^3.3.4",
         "floating-vue": "^2.0.0-beta.20",
-        "vue": "^3.2.47"
+        "vue": "^3.2.47",
+        "vue-color-kit": "^1.0.5"
     }
 }

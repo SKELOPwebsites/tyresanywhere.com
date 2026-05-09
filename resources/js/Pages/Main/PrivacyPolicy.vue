@@ -172,7 +172,7 @@
 
 <script setup>
 import { Link, Head } from "@inertiajs/vue3";
-import Container from "../Shared/Container.vue";
+import Container from "/resources/js/Shared/Main/Container.vue";
 
 </script>
 

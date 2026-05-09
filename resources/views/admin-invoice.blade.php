@@ -191,10 +191,12 @@
             border-top: 1px dotted rgb(75, 85, 99);
         }
         .footer {
-            width: 100%;
-            position: fixed;
+            position: absolute;
             bottom: 0;
-            text-align: center;
+            left: 0;
+        }
+        .footer p{
+            text-align: left;
         }
         .page-break {
             page-break-after: always;
@@ -204,11 +206,19 @@
 <body class="font-poppins">
     <div style="height: 300px">
         <div class="w-3\/4 float-left">
-            <img src="{{ public_path('images/main/tyresanywhere-bg.png') }}">
-            <p class="text-sm" style="line-height: 0.5rem">Tyres Anywhere LTD</p>
-            <p class="text-sm" style="line-height: 0.5rem">07442 980101</p>
-            <p class="text-sm" style="line-height: 0.5rem">info@tyresanywhere.com</p>
-            <p class="text-sm" style="line-height: 0.5rem">www.tyresanywhere.com</p>
+            @if($sender === 'tyresanywhere')
+                <img src="{{ public_path('images/main/tyresanywhere-bg.png') }}">
+                <p class="text-sm" style="line-height: 0.5rem">Tyres Anywhere LTD</p>
+                <p class="text-sm" style="line-height: 0.5rem">07989 606060</p>
+                <p class="text-sm" style="line-height: 0.5rem">info@tyresanywhere.com</p>
+                <p class="text-sm" style="line-height: 0.5rem">www.tyresanywhere.com</p>
+            @elseif($sender === 'wheelfit')
+                <img src="{{ public_path('images/main/wheelfit-bg.png') }}">
+                <p class="text-sm" style="line-height: 0.5rem">Wheel Fit</p>
+                <p class="text-sm" style="line-height: 0.5rem">07989 606060</p>
+                <p class="text-sm" style="line-height: 0.5rem">info@wheelfit.co.uk</p>
+                <p class="text-sm" style="line-height: 0.5rem">www.wheelfit.co.uk</p>
+            @endif
             <br>
             <p class="text-sm" style="line-height: 0.5rem">19 Plumer Road</p>
             <p class="text-sm" style="line-height: 0.5rem">High Wycombe</p>
@@ -235,9 +245,9 @@
 
     <hr class="border-gray-600">
 
-    <div>
-        <p class="font-bold text-2xl">Client Details:</p>
-        <div class="text-sm" style="line-height: 0.5rem">
+    <div style="display:flex">
+        <p class="font-bold text-xl">Client Details:</p>
+        <div class="text-xs" style="line-height: 0.25rem">
             <div>
                 <p class="font-bold">Name/Company</p>
                 <p>{{ $name }}</p>
@@ -321,6 +331,15 @@
     </div>
 
     <div class="w-full">
+        <div class="w-1\/2 text-sm float-left" style="float: left">
+            <p>
+                @if($notes)
+                    NOTES:
+
+                    {{ $notes }}
+                @endif
+            </p>
+        </div>
         <div class="w-5\/12 text-sm float-right" style="float: right">
             <div style="height: 16px; margin-top: 10px" class="w-full">
                 <p class="text-xs uppercase text-black float-left m-0">PAYMENT METHOD</p>
@@ -342,8 +361,12 @@
         </div>
     </div>
 
-    <div class="footer">
-        <p class="m-0 text-xs text-gray-600">&copy; 2022, Tyres Anywhere, Mobile Tyre Fitting</p>
+    <div class="footer float-left" style="float: left">
+        @if($sender === 'tyresanywhere')
+            <p class="m-0 text-xs text-gray-600">&copy; 2024, Tyres Anywhere, Mobile Tyre Fitting</p>
+        @elseif($sender === 'wheelfit')
+            <p class="m-0 text-xs text-gray-600">&copy; 2024, Wheel Fit, Mobile Tyre Fitting</p>
+        @endif
     </div>
 </body>
 </html>

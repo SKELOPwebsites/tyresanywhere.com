@@ -1,5 +1,5 @@
 <template>
-    <div class="lg:absolute bottom-0 left-1/2 lg:-translate-x-1/2 md:flex hidden items-center justify-center flex-col pt-4 lg:mt-0 mt-4">
+    <div class="lg:absolute bottom-0 left-1/2 lg:-translate-x-1/2 aaamd:flex hidden items-center justify-center flex-col pt-4 lg:mt-0 mt-4">
         <p @click="formOpen = !formOpen" class="cursor-pointer flex items-center justify-center space-x-4 text-shadow-red block xl:text-5xl sm:text-4xl text-2xl font-bold uppercase lg:text-white text-gray-800 mb-3">
             <span class="lg:block hidden">
                 <svg v-if="!formOpen" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 anim">
@@ -89,8 +89,8 @@
 
 <script setup>
 import { watch, ref, computed } from "vue";
-import { usePage, useForm } from "@inertiajs/vue3"
-import Container from "./Container.vue"
+import { usePage, useForm, router } from "@inertiajs/vue3"
+import Container from "/resources/js/Shared/Main/Container.vue"
 
 const tyre_sizes = computed(() => usePage().props.tyre_sizes)
 
@@ -160,9 +160,9 @@ function getOtherWidths() {
 
 function submit() {
     if(valid.value){
-        form.submit('post' ,'/search-tyres', {
-            preserveScroll: true
-        })
+        let url = '/tyre/'+form.width+form.profile+form.rim+'?postcode='+form.postcode
+
+        router.get(url)
     }
 }
 

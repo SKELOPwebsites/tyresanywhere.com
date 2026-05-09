@@ -1,5 +1,5 @@
 <template>
-    <div class="relative border-t border-stone-800" v-click-outside="() => open = false">
+    <div class="relative border-t border-gray-400" v-click-outside="() => open = false">
         <div class="w-full flex items-center justify-start select-none text-xs px-2 py-3 font-semibold cursor-pointer">
             <span class="text-site-400" v-text="name"></span>
         </div>
@@ -63,7 +63,7 @@ const update = (val) => {
 input[type="checkbox"] {
     -webkit-appearance: none;
     appearance: none;
-    background-color: rgb(68, 64, 60);
+    background-color: rgb(229, 231, 235);
     margin: 0;
 
     padding:1px;
@@ -71,7 +71,7 @@ input[type="checkbox"] {
     color: currentColor;
     width: 1.15em;
     height: 1.15em;
-    border: 1px solid rgb(41, 37, 36);
+    border: 1px solid rgb(156, 163, 175);
     border-radius: 0.15em;
     transform: translateY(-0.075em);
 

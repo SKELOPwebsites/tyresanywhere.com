@@ -31,7 +31,7 @@
             </div>
             <div v-if="!$page.props.success" class="mb-6">
                 <p class="text-4xl font-light mb-2">Contact Us</p>
-                <p class="text-sm">Contact us by giving us a call on <a class="underline font-semibold" href="tel:07442980101">07442 980101</a>, or by filling out the form below.</p>
+                <p class="text-sm">Contact us by giving us a call on <a class="underline font-semibold" href="tel:07989606060">07989 606060</a>, or by filling out the form below.</p>
             </div>
 
             <div class="w-full md:grid md:grid-cols-12 flex flex-col-reverse">
@@ -86,7 +86,7 @@
                     </form>
                 </div>
                 <div class="lg:col-span-6 md:col-span-5 xl:pl-24 lg:pl-16 md:pl-4">
-                    <p class="xl:text-3xl lg:text-2xl text-xl text-gray-600 md:mb-6 mb-2">Tel: <a class="text-blue-700 hover:text-cyan-500 transition duration-300 ease-in-out" href="tel:07442980101">07442 980101</a></p>
+                    <p class="xl:text-3xl lg:text-2xl text-xl text-gray-600 md:mb-6 mb-2">Tel: <a class="text-blue-700 hover:text-cyan-500 transition duration-300 ease-in-out" href="tel:07989606060">07989 606060</a></p>
                     <p class="xl:text-3xl lg:text-2xl text-xl text-gray-600">Email: <a class="text-blue-700 hover:text-cyan-500 transition duration-300 ease-in-out" href="mailto:info@tyresanywhere.com">info@tyresanywhere.com</a></p>
                 </div>
             </div>
@@ -98,7 +98,7 @@
 <script setup>
 import { router, Link, Head } from "@inertiajs/vue3";
 import { reactive } from "vue";
-import Container from "../Shared/Container.vue";
+import Container from "/resources/js/Shared/Main/Container.vue";
 
 defineProps({
     errors: Object,

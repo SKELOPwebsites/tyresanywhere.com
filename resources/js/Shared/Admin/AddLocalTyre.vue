@@ -1,6 +1,6 @@
 <template>
     <div class="relative">
-        <div class="grid grid-cols-21 h-7 w-full border-x border-b border-gray-300">
+        <div class="grid grid-cols-22 h-7 w-full border-x border-b border-gray-300">
             <div class="col-span-1"></div>
             <div class="col-span-3 border-x relative flex items-center justify-center border-gray-300 h-full text-[11px]">
                 <div class="space-x-0.5 flex items-center">
@@ -23,7 +23,7 @@
                 <input
                     type="number"
                     min="0"
-                    v-model="form.quantity"
+                    v-model="form.desired_quantity"
                     class="bg-transparent outline-0 border border-black rounded-sm w-4/5 text-center"
                 >
             </div>
@@ -52,6 +52,14 @@
                 <input
                     type="text"
                     v-model="form.notes"
+                    class="bg-transparent outline-0 border border-black rounded-sm w-4/5 text-center"
+                >
+            </div>
+            <div class="col-span-1 border-r relative flex items-center justify-center border-gray-300 h-full text-[11px]">
+                <input
+                    type="number"
+                    min="0"
+                    v-model="form.quantity"
                     class="bg-transparent outline-0 border border-black rounded-sm w-4/5 text-center"
                 >
             </div>
@@ -94,6 +102,7 @@ watch(() => props.copyData, (newValue) => {
     form.model = newValue.model
     form.cost = newValue.cost
     form.quantity = newValue.quantity
+    form.desired_quantity = newValue.desired_quantity
     form.notes = newValue.notes
     form.sold = newValue.sold
     console.log(newValue)
@@ -114,6 +123,7 @@ const form = useForm({
     model: null,
     cost: null,
     quantity: null,
+    desired_quantity: null,
     notes: null,
     sold: 0,
 })

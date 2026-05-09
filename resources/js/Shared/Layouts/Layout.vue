@@ -8,12 +8,14 @@
 
     <Footer />
 
+    <WhatsappIcon name="Tyres Anywhere LTD" phoneNumber="+447989606060"/>
 </template>
 
 <script setup>
-import Header from "./Header.vue"
-import Navbar from "./Navbar.vue"
-import Footer from "./Footer.vue"
+import Header from "/resources/js/Shared/Main/Header.vue"
+import Navbar from "/resources/js/Shared/Main/Navbar.vue"
+import Footer from "/resources/js/Shared/Main/Footer.vue"
+import WhatsappIcon from "/resources/js/Shared/Main/WhatsappIcon.vue"
 
 </script>
 

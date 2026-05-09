@@ -4,8 +4,8 @@
     </Head>
     <div class="mt-6">
 
-        <div class="flex h-[90px]">
-            <div class="w-[640px] shrink-0 grid grid-cols-2 gap-2">
+        <div class="flex"> <!-- h-[90px] -->
+            <div class="w-[640px] h-[90px] shrink-0 grid grid-cols-2 gap-2">
                 <div class="col-span-1 h-10 flex items-center justify-center text-center border border-black">
                     <div class="w-2/5 h-full flex items-center justify-center bg-neutral-400">
                         <span class="uppercase font-semibold">Stocks</span>
@@ -39,6 +39,8 @@
                     </div>
                 </div>
             </div>
+
+            <LocalStockFilter />
         </div>
 
         <div class="w-full grid grid-cols-10 mb-4 mt-6">
@@ -63,7 +65,7 @@
             </AdminColorPicker>
         </div>
 
-        <div class="bg-indigo-400 grid grid-cols-21 w-full h-6 border border-gray-500">
+        <div class="bg-indigo-400 grid grid-cols-22 w-full h-6 border border-gray-500">
             <div class="col-span-1 flex items-center justify-center border-r border-gray-500 h-full text-xs font-bold"><span>#</span></div>
             <div class="col-span-3 flex items-center justify-center border-r border-gray-500 h-full text-xs font-bold"><span>Tyre Size</span></div>
             <div class="col-span-1 flex items-center justify-center border-r border-gray-500 h-full text-xs font-bold"><span>Qty</span></div>
@@ -72,6 +74,7 @@
             <div class="col-span-2 flex items-center justify-center border-r border-gray-500 h-full text-xs font-bold"><span>T Price</span></div>
             <div class="col-span-4 flex items-center justify-center border-r border-gray-500 h-full text-xs font-bold"><span>Model</span></div>
             <div class="col-span-4 flex items-center justify-center border-r border-gray-500 h-full text-xs font-bold"><span>Notes</span></div>
+            <div class="col-span-1 flex items-center justify-center border-r border-gray-500 h-full text-xs font-bold"><span>Req'd Qty</span></div>
             <div class="col-span-1 flex items-center justify-center border-gray-500 h-full text-xs font-bold"><span>Sold</span></div>
         </div>
 

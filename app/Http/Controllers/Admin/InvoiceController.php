@@ -56,10 +56,25 @@ class InvoiceController extends Controller
     {
         $details = $this->getDetails($request);
 
+        // Assuming $details['sender'] contains 'tyresanywhere' or 'wheelfit'
+        $sender = $details['sender'];
+
+        // Determine the correct sender email based on the $sender variable
+        $fromEmail = '';
+        $fromName = '';
+
+        if ($sender === 'tyresanywhere') {
+            $fromEmail = 'info@tyresanywhere.com';
+            $fromName = 'Tyres Anywhere LTD';
+        } elseif ($sender === 'wheelfit') {
+            $fromEmail = 'info@wheelfit.co.uk';
+            $fromName = 'Wheel Fit';
+        }
+
         $invoice = PDF::loadView('admin-invoice', $details);
 
-        Mail::to($details['recipient_email'])->send(new InvoiceMail($invoice->output(), $details['name']));
-        Mail::to(config('mail.from.address'))->send(new InvoiceMail($invoice->output(), $details['name']));
+        Mail::to($details['recipient_email'])->send(new InvoiceMail($invoice->output(), $details['name'], $fromEmail, $fromName));
+        Mail::to($fromEmail)->send(new InvoiceMail($invoice->output(), $details['name'], $fromEmail, $fromName));
 
         $request->session()->remove('pdf_details');
         return redirect('/admin/pdf-invoice')->with('flash.success.admin', 'Invoice has been successfully sent!');
@@ -69,9 +84,10 @@ class InvoiceController extends Controller
     {
         $details = $request->validate([
             'date' => ['required', 'date'],
+            'sender' => ['required', 'string'],
             'name' => ['required', 'string'],
             'email' => ['required', 'email'],
-            'phone' => ['nullable', 'numeric'],
+            'phone' => ['nullable', 'string'],
             'address' => ['nullable', 'string'],
             'town' => ['nullable', 'string'],
             'postcode' => ['nullable', 'string'],
@@ -88,6 +104,7 @@ class InvoiceController extends Controller
             'payment_type' => ['required', 'string'],
             'amount_to_pay' => ['nullable', 'numeric'],
             'recipient_email' => ['required', 'email'],
+            'notes' => ['nullable', 'string'],
         ]);
 
         if(!$details['amount_to_pay']){

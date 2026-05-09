@@ -53,7 +53,7 @@
 
 <script setup>
 import { Link } from "@inertiajs/vue3";
-import Container from "./Container.vue";
+import Container from "/resources/js/Shared/Main/Container.vue";
 
 </script>
 

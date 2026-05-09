@@ -6,12 +6,12 @@
         <div class="w-full mx-auto pt-8">
             <div class="flex justify-center items-center space-x-4 mb-8">
                 <p class="font-semibold text-3xl text-center">PDF Invoice</p>
-<!--                <button-->
-<!--                    @click="test()"-->
-<!--                    class="relative mt-auto w-24 rounded outline-0 h-[2.125rem] text-base text-center uppercase bg-green-500 hover:bg-green-600 text-white font-semibold transition duration-150 ease-in-out"-->
-<!--                >-->
-<!--                    <span>Test</span>-->
-<!--                </button>-->
+                <button
+                    @click="test()"
+                    class="relative mt-auto w-24 rounded outline-0 h-[2.125rem] text-base text-center uppercase bg-green-500 hover:bg-green-600 text-white font-semibold transition duration-150 ease-in-out"
+                >
+                    <span>Test</span>
+                </button>
             </div>
 
             <div class="grid grid-cols-12 gap-6">
@@ -336,6 +336,31 @@
                         />
                         <span class="text-xs text-red-500" v-if="errors.date" v-text="errors.date"></span>
                     </div>
+                    <div class="mt-2">
+                        <Label :required="true">Sender</Label>
+
+                        <div class="mt-2 flex flex-row items-center space-x-4" id="sender">
+                            <div class="flex items-center space-x-1">
+                                <input type="radio" id="tyresanywhere" value="tyresanywhere" v-model="form.sender">
+                                <label class="block sm:text-sm text-xs text-gray-700" for="tyresanywhere">Tyres Anywhere LTD</label>
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <input type="radio" id="wheelfit" value="wheelfit" v-model="form.sender">
+                                <label class="block sm:text-sm text-xs text-gray-700" for="wheelfit">Wheel Fit</label>
+                            </div>
+                        </div>
+                        <span class="text-xs text-red-500" v-if="errors.sender" v-text="errors.sender"></span>
+                    </div>
+                    <div class="mt-2">
+                        <Label>Notes</Label>
+
+                        <Input
+                            v-model="form.notes"
+                            type="text"
+                            id="notes"
+                        />
+                        <span class="text-xs text-red-500" v-if="errors.notes" v-text="errors.notes"></span>
+                    </div>
                     <div class="mt-4">
                         <SwitchGroup>
                             <div class="w-fit mx-auto px-4 py-2 rounded-xl flex sm:flex-row flex-col items-center justify-center bg-gray-100 sm:space-x-4 sm:space-y-0 space-y-4">
@@ -366,7 +391,7 @@
                         <span class="text-xs text-red-500" v-if="errors.recipient_email" v-text="errors.recipient_email"></span>
                     </div>
 
-                    <button @click="submit" :class="{'relative mt-auto w-full rounded outline-0 h-[2.125rem] text-base text-center uppercase bg-green-500 hover:bg-green-600 text-white font-semibold transition duration-150 ease-in-out': true, 'button--loading': form.processing}">
+                    <button @click="submit" :class="{'relative mt-4 w-full rounded outline-0 h-[2.125rem] text-base text-center uppercase bg-green-500 hover:bg-green-600 text-white font-semibold transition duration-150 ease-in-out': true, 'button--loading': form.processing}">
                         <span v-if="!form.processing">Preview Invoice</span>
                     </button>
                 </div>
@@ -406,6 +431,7 @@ const props = defineProps({
         required: false,
         default: {
             date: null,
+            sender: null,
             name: null,
             phone: null,
             email: null,
@@ -425,6 +451,7 @@ const props = defineProps({
             payment_type: null,
             amount_to_pay: null,
             recipient_email: null,
+            notes: null,
         },
     }
 })
@@ -448,6 +475,7 @@ const items = ref([{ name: null, qty: null, total: null }]);
 
 const form = useForm({
     date: props.details.date,
+    sender: props.details.sender,
     name: props.details.name,
     phone: props.details.phone,
     email: props.details.email,
@@ -467,9 +495,11 @@ const form = useForm({
     payment_type: props.details.payment_type,
     amount_to_pay: props.details.amount_to_pay,
     recipient_email: props.details.recipient_email,
+    notes: props.details.notes,
 });
 function test() {
     form.date = '2024-10-10'
+    form.sender = 'tyresanywhere'
     form.name = 'Ali'
     form.phone = '0751069498'
     form.email = 'aliplayzzz0@gmail.com'
@@ -489,6 +519,7 @@ function test() {
     form.payment_type = 'Cash'
     form.amount_to_pay = 20
     form.recipient_email = ''
+    form.notes = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 }
 function addItem() {
     form.items.push({ name: null, qty: null, total: null })

@@ -95,7 +95,7 @@
                                 <path fill-rule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                                 <path fill-rule="evenodd" d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                             </svg>
-                            <span>Need mobile tyre services ASAP?, please call us on <a class="text-blue-600 underline" href="tel:07442980101">07442 980101</a> for a prompt service</span>
+                            <span>Need mobile tyre services ASAP?, please call us on <a class="text-blue-600 underline" href="tel:07989606060">07989 606060</a> for a prompt service</span>
                         </p>
                     </div>
                     <div class="xl:col-span-8 col-span-7 lg:p-4">
@@ -160,7 +160,7 @@
                                 <path fill-rule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                                 <path fill-rule="evenodd" d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                             </svg>
-                            <span>Need mobile tyre services ASAP?, please call us on <a class="text-blue-600 underline" href="tel:07442980101">07442 980101</a> for a prompt service</span>
+                            <span>Need mobile tyre services ASAP?, please call us on <a class="text-blue-600 underline" href="tel:07989606060">07989 606060</a> for a prompt service</span>
                         </p>
                     </div>
                 </div>
@@ -180,13 +180,13 @@
 
 <script setup>
 import { Head } from "@inertiajs/vue3"
-import Container from "../Shared/Container.vue";
-import CustomerRating from "../Shared/CustomerRating.vue";
-import PopularTyreBrands from "../Shared/PopularTyreBrands.vue";
-import AreasWeCover from "../Shared/AreasWeCover.vue";
-import OurServices from "../Shared/OurServices.vue";
-import SearchTyres from "../Shared/SearchTyres.vue";
-import Content from "../Shared/Content.vue";
+import Container from "/resources/js/Shared/Main/Container.vue";
+import CustomerRating from "/resources/js/Shared/Main/Misc/CustomerRating.vue";
+import PopularTyreBrands from "/resources/js/Shared/Main/Misc/PopularTyreBrands.vue";
+import AreasWeCover from "/resources/js/Shared/Main/Misc/AreasWeCover.vue";
+import OurServices from "/resources/js/Shared/Main/Misc/OurServices.vue";
+import SearchTyres from "/resources/js/Shared/Main/Misc/SearchTyres.vue";
+import Content from "/resources/js/Shared/Main/Content.vue";
 
 </script>
 

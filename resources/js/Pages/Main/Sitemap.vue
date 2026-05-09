@@ -26,21 +26,42 @@
                     <p class="md:text-lg text-base font-semibold">Service</p>
                     <div class="flex flex-col items-start mt-4 space-y-2">
                         <Link href="/search-tyres" class="md:text-base text-sm text-blue-600 hover:underline">Search Tyres</Link>
-                        <Link href="/checkout/basket" class="md:text-base text-sm text-blue-500 hover:underline">Basket</Link>
+                        <Link href="/cart" class="md:text-base text-sm text-blue-500 hover:underline">Cart</Link>
                     </div>
                 </div>
                 <div class="xl:col-span-6 col-span-12">
-                    <p class="md:text-lg text-base font-semibold">Coverage</p>
-                    <div class="grid grid-cols-12 gap-2 items-start mt-4">
-                        <div
-                            v-for="area in areas"
-                            class="col-span-4"
+                    <p class="md:text-lg text-base font-semibold">Coverage (expand sections)</p>
+
+                    <div v-for="(areaGroup, letter) in areas" :key="letter" class="mt-4">
+                        <button
+                            @click="toggleSection(letter)"
+                            class="flex justify-between items-center w-full border p-3"
                         >
-                            <Link
-                                :href="'/locations/'+area.slug"
-                                class="md:text-base text-sm text-blue-600 hover: capitalize"
-                                v-text="area.area"
-                            ></Link>
+                            <span>{{ letter }}</span>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                :class="{'rotate-180': openSections.includes(letter)}"
+                                class="size-6 transition"
+                            >
+                                <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+
+                        <!-- Area Links, only visible if section is open -->
+                        <div v-show="openSections.includes(letter)" class="grid grid-cols-12 gap-2 items-start mt-4 px-2">
+                            <div
+                                v-for="area in areaGroup"
+                                :key="area.slug"
+                                class="col-span-4"
+                            >
+                                <Link
+                                    :href="'/locations/' + area.slug"
+                                    class="md:text-base text-sm text-blue-600 hover: capitalize"
+                                    v-text="area.area"
+                                ></Link>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -51,12 +72,25 @@
 
 
 <script setup>
+import { ref } from "vue"
 import { Link, Head } from "@inertiajs/vue3";
-import Container from "../Shared/Container.vue";
+import Container from "/resources/js/Shared/Main/Container.vue";
 
 defineProps({
     areas: Object,
 })
+
+// Open sections tracking
+const openSections = ref([]);
+
+// Toggle section visibility
+const toggleSection = (letter) => {
+    if (openSections.value.includes(letter)) {
+        openSections.value = openSections.value.filter(l => l !== letter);
+    } else {
+        openSections.value.push(letter);
+    }
+};
 </script>
 
 <style scoped>

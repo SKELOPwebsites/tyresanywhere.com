@@ -10,7 +10,7 @@
 
             <p class="text-sm">
                 Tyres Anywhere LTD is a mobile tyre fitting business in the UK that provides emergency or non-emergency
-                tyre fitting or repairs. Contact information is as followed: telephone: (07442 980101), email: (info@tyresanywhere.com)
+                tyre fitting or repairs. Contact information is as followed: telephone: (07989 606060), email: (info@tyresanywhere.com)
             </p>
             <br>
             <p class="text-sm">
@@ -39,7 +39,7 @@
             <h3 class="text-2xl">1. How to contact us</h3>
             <br>
             <p class="text-sm">
-                Call us on 07442 980101
+                Call us on 07989 606060
             </p>
             <br>
             <p class="text-sm">
@@ -180,7 +180,7 @@
 
 <script setup>
 import { Link, Head } from "@inertiajs/vue3";
-import Container from "../Shared/Container.vue";
+import Container from "/resources/js/Shared/Main/Container.vue";
 
 </script>
 

@@ -24,8 +24,8 @@
 <script setup>
 import { onMounted, ref, reactive, watch } from "vue";
 import { useForm, usePage } from "@inertiajs/vue3"
-import TimeslotsPC from "./TimeslotsPC.vue";
-import TimeslotsMob from "./TimeslotsMob.vue";
+import TimeslotsPC from "/resources/js/Shared/Checkout/Timeslot/TimeslotsPC.vue";
+import TimeslotsMob from "/resources/js/Shared/Checkout/Timeslot/TimeslotsMob.vue";
 
 const props = defineProps({
     class: {

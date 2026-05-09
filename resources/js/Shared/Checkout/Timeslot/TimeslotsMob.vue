@@ -47,7 +47,7 @@
 
 <script setup>
 import { ref } from "vue"
-import TimeslotMob from "./TimeslotMob.vue";
+import TimeslotMob from "/resources/js/Shared/Checkout/Timeslot/TimeslotMob.vue";
 import {usePage} from "@inertiajs/vue3";
 
 const props = defineProps({

@@ -31,9 +31,10 @@
     <h1 v-if="search_results && search_results.length" class="text-center text-2xl font-semibold mt-12" v-text="search_results[0].width + '/' + search_results[0].profile + ' R' + search_results[0].rim"></h1>
     <h1 v-else class="text-center text-2xl font-semibold mt-12">No tyres in this size</h1>
 
-    <div class="mt-6 space-y-2">
-        <button
+    <div class="mt-6 space-y-2" v-click-outside="() => selectedTyre = null">
+        <div
             v-for="tyre in search_results"
+            @click="selectedTyre = tyre.id"
             class="relative group overflow-hidden bg-white p-2 w-full rounded-lg shadow-lg flex items-center"
         >
             <div class="h-7 mr-3">
@@ -46,15 +47,22 @@
             </div>
             <span class="ml-auto font-semibold" v-text="'£' + tyre.cost"></span>
 
-            <button @click="sellTyre(tyre.id)" class="absolute right-0 bg-green-400 w-40 h-9 translate-x-full group-focus:translate-x-0 transition">
-                <span class="font-bold uppercase">Sell 1</span>
-            </button>
-        </button>
+             <Transition>
+                 <button
+                     @click="sellTyre(tyre.id)"
+                     class="absolute right-0 bg-green-400 w-40 h-9"
+                     v-show="selectedTyre === tyre.id"
+                 >
+                     <span class="font-bold uppercase">Sell 1</span>
+                 </button>
+             </Transition>
+        </div>
     </div>
 </template>
 
 <script setup>
 import { useForm } from "@inertiajs/vue3"
+import { ref } from "vue"
 
 defineProps({
     search_results: Object,
@@ -72,12 +80,15 @@ const form = useForm({
     rim: null,
 })
 
+
 function submit() {
     form.post('/admin/inventory/search', {
         preserveScroll: true,
         preserveState: true,
     })
 }
+
+const selectedTyre = ref(null);
 
 function sellTyre(_id) {
     emit('sellTyre', _id)
@@ -86,5 +97,13 @@ function sellTyre(_id) {
 </script>
 
 <style scoped>
+.v-enter-active,
+.v-leave-active {
+    transition: transform 0.25s ease;
+}
 
+.v-enter-from,
+.v-leave-to {
+    transform: translateX(100%);
+}
 </style>

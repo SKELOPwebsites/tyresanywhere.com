@@ -10,12 +10,17 @@
                 >
                     <CarouselSlide :index="0" :visibleSlide="visibleSlide" :direction="direction">
                         <img
-                            src="/images/showcase/gallary/mobile-tyre-fitting-1.webp"
+                            src="/images/showcase/gallary/mobile-tyre-fitting-1-300.webp"
                             srcset="/images/showcase/gallary/mobile-tyre-fitting-1.webp 1080w,
                                     /images/showcase/gallary/mobile-tyre-fitting-1-500.webp 500w,
                                     /images/showcase/gallary/mobile-tyre-fitting-1-300.webp 300w"
                             class="object-cover object-center w-full h-full brightness-[0.6]"
-                            sizes="(min-width: 1536px) 1280px, (min-width: 1280px) 1152px, (min-width: 1024px) 896px, 100vw"
+                            sizes="(min-width: 1536px) 1280px,
+                               (min-width: 1280px) 1152px,
+                               (min-width: 1024px) 896px,
+                               (min-width: 768px) 400px,
+                               (min-width: 640px) 200px,
+                               200px"
                             alt="Tyres Anywhere LTD Mobile Tyres Van"
                         >
                         <div class="absolute left-[15%] right-[15%] md:top-24 md:translate-y-0 top-1/2 -translate-y-1/2 pt-5 pb-5 text-white text-center">
@@ -30,8 +35,14 @@
                                     /images/showcase/gallary/mobile-tyre-fitting-2-500.webp 500w,
                                     /images/showcase/gallary/mobile-tyre-fitting-2-300.webp 300w"
                             class="object-cover object-center w-full h-full brightness-[0.6]"
-                            sizes="(min-width: 1536px) 1280px, (min-width: 1280px) 1152px, (min-width: 1024px) 896px, 100vw"
+                            sizes="(min-width: 1536px) 1280px,
+                               (min-width: 1280px) 1152px,
+                               (min-width: 1024px) 896px,
+                               (min-width: 768px) 400px,
+                               (min-width: 640px) 200px,
+                               200px"
                             alt="Mobile Tyre Fitting"
+                            loading="lazy"
                         >
                         <div class="absolute left-[15%] right-[15%] md:top-24 md:translate-y-0 top-1/2 -translate-y-1/2 pt-5 pb-5 text-white text-center">
                             <h1 v-if="!location" class="md:text-4xl sm:text-3xl text-2xl font-bold text-center mb-1">Mobile Tyre Fitting</h1>
@@ -46,8 +57,14 @@
                                     /images/showcase/gallary/mobile-tyre-fitting-3-500.webp 500w,
                                     /images/showcase/gallary/mobile-tyre-fitting-3-300.webp 300w"
                             alt="Mobile tyre puncture repair"
-                            sizes="(min-width: 1536px) 1280px, (min-width: 1280px) 1152px, (min-width: 1024px) 896px, 100vw"
+                            sizes="(min-width: 1536px) 1280px,
+                               (min-width: 1280px) 1152px,
+                               (min-width: 1024px) 896px,
+                               (min-width: 768px) 400px,
+                               (min-width: 640px) 200px,
+                               200px"
                             class="object-cover object-center w-full h-full brightness-[0.6]"
+                            loading="lazy"
                         >
                         <div class="absolute left-[15%] right-[15%] md:top-24 md:translate-y-0 top-1/2 -translate-y-1/2 pt-5 pb-5 text-white text-center">
                             <h1 v-if="!location" class="md:text-4xl sm:text-3xl text-2xl font-bold text-center mb-1">30-60 Minute Response</h1>
@@ -62,8 +79,14 @@
                                     /images/showcase/gallary/mobile-tyre-fitting-4-500.webp 500w,
                                     /images/showcase/gallary/mobile-tyre-fitting-4-300.webp 300w"
                             class="object-cover object-center w-full h-full brightness-[0.6]"
-                            sizes="(min-width: 1536px) 1280px, (min-width: 1280px) 1152px, (min-width: 1024px) 896px, 100vw"
+                            sizes="(min-width: 1536px) 1280px,
+                               (min-width: 1280px) 1152px,
+                               (min-width: 1024px) 896px,
+                               (min-width: 768px) 400px,
+                               (min-width: 640px) 200px,
+                               200px"
                             alt="Tyres Anywhere LTD Mobile Tyres Van"
+                            loading="lazy"
                         >
                         <div class="absolute left-[15%] right-[15%] md:top-24 md:translate-y-0 top-1/2 -translate-y-1/2 pt-5 pb-5 text-white text-center">
                             <h1 class="md:text-4xl sm:text-3xl text-2xl font-bold text-center mb-1">We Come To You!</h1>
@@ -77,8 +100,14 @@
                                     /images/showcase/gallary/mobile-tyre-fitting-5-500.webp 500w,
                                     /images/showcase/gallary/mobile-tyre-fitting-5-300.webp 300w"
                             class="object-cover object-center w-full h-full brightness-[0.6]"
-                            sizes="(min-width: 1536px) 1280px, (min-width: 1280px) 1152px, (min-width: 1024px) 896px, 100vw"
+                            sizes="(min-width: 1536px) 1280px,
+                               (min-width: 1280px) 1152px,
+                               (min-width: 1024px) 896px,
+                               (min-width: 768px) 400px,
+                               (min-width: 640px) 200px,
+                               200px"
                             alt="Mobile Tyre Fitting"
+                            loading="lazy"
                         >
                         <div class="absolute left-[15%] right-[15%] md:top-24 md:translate-y-0 top-1/2 -translate-y-1/2 pt-5 pb-5 text-white text-center">
                             <h1 v-if="!location" class="md:text-4xl sm:text-3xl text-2xl font-bold text-center mb-1">Mobile Tyre Fitting</h1>
@@ -93,8 +122,14 @@
                                     /images/showcase/gallary/mobile-tyre-fitting-6-500.webp 500w,
                                     /images/showcase/gallary/mobile-tyre-fitting-6-300.webp 300w"
                             alt="Mobile tyre puncture repair"
-                            sizes="(min-width: 1536px) 1280px, (min-width: 1280px) 1152px, (min-width: 1024px) 896px, 100vw"
+                            sizes="(min-width: 1536px) 1280px,
+                               (min-width: 1280px) 1152px,
+                               (min-width: 1024px) 896px,
+                               (min-width: 768px) 400px,
+                               (min-width: 640px) 200px,
+                               200px"
                             class="object-cover object-center w-full h-full brightness-[0.6]"
+                            loading="lazy"
                         >
                         <div class="absolute left-[15%] right-[15%] md:top-24 md:translate-y-0 top-1/2 -translate-y-1/2 pt-5 pb-5 text-white text-center">
                             <h1 v-if="!location" class="md:text-4xl sm:text-3xl text-2xl font-bold text-center mb-1">30-60 Minute Response</h1>
@@ -109,8 +144,14 @@
                                     /images/showcase/gallary/mobile-tyre-fitting-7-500.webp 500w,
                                     /images/showcase/gallary/mobile-tyre-fitting-7-300.webp 300w"
                             class="object-cover object-center w-full h-full brightness-[0.6]"
-                            sizes="(min-width: 1536px) 1280px, (min-width: 1280px) 1152px, (min-width: 1024px) 896px, 100vw"
+                            sizes="(min-width: 1536px) 1280px,
+                               (min-width: 1280px) 1152px,
+                               (min-width: 1024px) 896px,
+                               (min-width: 768px) 400px,
+                               (min-width: 640px) 200px,
+                               200px"
                             alt="Tyres Anywhere LTD Mobile Tyres Van"
+                            loading="lazy"
                         >
                         <div class="absolute left-[15%] right-[15%] md:top-24 md:translate-y-0 top-1/2 -translate-y-1/2 pt-5 pb-5 text-white text-center">
                             <h1 class="md:text-4xl sm:text-3xl text-2xl font-bold text-center mb-1">We Come To You!</h1>
@@ -124,8 +165,14 @@
                                     /images/showcase/gallary/mobile-tyre-fitting-8-500.webp 500w,
                                     /images/showcase/gallary/mobile-tyre-fitting-8-300.webp 300w"
                             class="object-cover object-center w-full h-full brightness-[0.6]"
-                            sizes="(min-width: 1536px) 1280px, (min-width: 1280px) 1152px, (min-width: 1024px) 896px, 100vw"
+                            sizes="(min-width: 1536px) 1280px,
+                               (min-width: 1280px) 1152px,
+                               (min-width: 1024px) 896px,
+                               (min-width: 768px) 400px,
+                               (min-width: 640px) 200px,
+                               200px"
                             alt="Mobile Tyre Fitting"
+                            loading="lazy"
                         >
                         <div class="absolute left-[15%] right-[15%] md:top-24 md:translate-y-0 top-1/2 -translate-y-1/2 pt-5 pb-5 text-white text-center">
                             <h1 v-if="!location" class="md:text-4xl sm:text-3xl text-2xl font-bold text-center mb-1">Mobile Tyre Fitting</h1>
@@ -140,8 +187,14 @@
                                     /images/showcase/gallary/mobile-tyre-fitting-9-500.webp 500w,
                                     /images/showcase/gallary/mobile-tyre-fitting-9-300.webp 300w"
                             alt="Mobile tyre puncture repair"
-                            sizes="(min-width: 1536px) 1280px, (min-width: 1280px) 1152px, (min-width: 1024px) 896px, 100vw"
+                            sizes="(min-width: 1536px) 1280px,
+                               (min-width: 1280px) 1152px,
+                               (min-width: 1024px) 896px,
+                               (min-width: 768px) 400px,
+                               (min-width: 640px) 200px,
+                               200px"
                             class="object-cover object-center w-full h-full brightness-[0.6]"
+                            loading="lazy"
                         >
                         <div class="absolute left-[15%] right-[15%] md:top-24 md:translate-y-0 top-1/2 -translate-y-1/2 pt-5 pb-5 text-white text-center">
                             <h1 v-if="!location" class="md:text-4xl sm:text-3xl text-2xl font-bold text-center mb-1">30-60 Minute Response</h1>
@@ -161,10 +214,10 @@
 
 <script setup>
 import { ref, watch } from "vue"
-import Container from "../Shared/Container.vue"
-import Carousel from "../Shared/Carousel.vue"
-import CarouselSlide from "../Shared/CarouselSlide.vue"
-import MainCarouselSearchTyres from "../Shared/MainCarouselSearchTyres.vue"
+import Container from "/resources/js/Shared/Main/Container.vue"
+import Carousel from "/resources/js/Shared/Main/Carousel/Carousel.vue"
+import CarouselSlide from "/resources/js/Shared/Main/Carousel/CarouselSlide.vue"
+import MainCarouselSearchTyres from "/resources/js/Shared/Main/Carousel/MainCarouselSearchTyres.vue"
 
 defineProps({
     location: {

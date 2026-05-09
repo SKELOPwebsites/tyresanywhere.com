@@ -155,7 +155,7 @@ watch(message, () => {
 }
 
 .bg-whatsapp{
-    background: url("/assets/images/background-whatsapp.jpg") no-repeat center center;
+    background: url("/images/background-whatsapp.jpg") no-repeat center center;
     background-size: cover;
 }
 

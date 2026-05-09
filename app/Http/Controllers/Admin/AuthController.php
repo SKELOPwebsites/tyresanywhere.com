@@ -12,7 +12,7 @@ class AuthController extends Controller
 {
     public function create()
     {
-        //dd(bcrypt('MtJuJrSAS'));
+        //dd(bcrypt('Yonus33977241'));
         return Inertia::render('Admin/Login');
     }
 

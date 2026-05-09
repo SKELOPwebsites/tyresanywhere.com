@@ -1,6 +1,6 @@
 <template>
     <div class="relative">
-        <div class="grid grid-cols-21 h-7 w-full border-x border-gray-300 font-semibold">
+        <div class="grid grid-cols-22 h-7 w-full border-x border-gray-300 font-semibold">
             <Text
                 class="col-span-1 border font-normal"
                 :text="index + 1"
@@ -25,7 +25,13 @@
             />
             <Quantity
                 class="col-span-1 border"
-                :style="{ background: tyre.quantity === 0 ? '#ff0000' : tyre.quantity_bg, color: tyre.quantity_font }"
+                :style="{
+                          background: (tyre.quantity === 0 && tyre.desired_quantity === 0) ? tyre.quantity_bg :
+                                     (tyre.quantity === 0) ? '#ff0000' :
+                                     (tyre.quantity < tyre.desired_quantity) ? '#FFBF00' :
+                                     (tyre.quantity > tyre.desired_quantity) ? '#AFEEEE' : tyre.quantity_bg,
+                          color: tyre.quantity_font
+                        }"
                 :text="form.quantity"
                 :value="form.quantity"
                 :editable="true"
@@ -94,6 +100,18 @@
             />
             <Quantity
                 class="col-span-1 border"
+                :style="{ background: tyre.desired_quantity_bg, color: tyre.desired_quantity_font }"
+                :text="form.desired_quantity"
+                :value="form.desired_quantity"
+                :editable="true"
+                property="desired_quantity"
+                @update="update"
+                data-selectable
+                :data-id="tyre.id"
+                data-column="desired_quantity"
+            />
+            <Quantity
+                class="col-span-1 border"
                 :style="{ background: tyre.sold_bg, color: tyre.sold_font }"
                 :text="form.sold"
                 :value="form.sold"
@@ -152,6 +170,7 @@ const form = useForm({
     model: props.tyre.model,
     cost: props.tyre.cost,
     quantity: props.tyre.quantity,
+    desired_quantity: props.tyre.desired_quantity,
     notes: props.tyre.notes,
     sold: props.tyre.sold,
 })
@@ -177,6 +196,9 @@ function update(property, value) {
             break
         case 'quantity':
             form.quantity = value
+            break
+        case 'desired_quantity':
+            form.desired_quantity = value
             break
         case 'notes':
             form.notes = value

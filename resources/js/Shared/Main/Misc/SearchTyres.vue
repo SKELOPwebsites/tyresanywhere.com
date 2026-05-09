@@ -1,5 +1,5 @@
 <template>
-    <Container>
+    <Container class="hidden">
         <div class="pt-6 sm:pb-8 pb-6 shadow-red bg-white">
 
             <form @submit.prevent="submit" class="grid lg:grid-cols-8 grid-cols-12 items-end gap-x-2 gap-y-4 xl:px-24 sm:px-4 px-3 w-full">
@@ -62,8 +62,8 @@
 
 <script setup>
 import { watch, ref, computed } from "vue";
-import { usePage, useForm } from "@inertiajs/vue3"
-import Container from "./Container.vue"
+import {usePage, useForm, router} from "@inertiajs/vue3"
+import Container from "/resources/js/Shared/Main/Container.vue"
 
 const tyre_sizes = computed(() => usePage().props.tyre_sizes)
 
@@ -131,9 +131,9 @@ function getOtherWidths() {
 
 function submit() {
     if(valid.value){
-        form.submit('post' ,'/search-tyres', {
-            preserveScroll: true
-        })
+        let url = '/tyre/'+form.width+form.profile+form.rim+'?postcode='+form.postcode
+
+        router.get(url)
     }
 }
 

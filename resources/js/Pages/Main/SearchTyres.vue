@@ -4,7 +4,12 @@
         <meta name="description" content="Enter your tyre size to search a wide range of high-quality tyres and decide when &amp; where to have it fitted by our mobile tyre fitters.">
         <link rel="canonical" href="https://tyresanywhere.com/search-tyres">
     </Head>
-    <div class="md:max-w-xl sm:max-w-lg max-w-xs mx-auto w-full sm:my-12 my-6">
+    <div class="relative md:max-w-xl sm:max-w-lg max-w-xs mx-auto w-full sm:my-12 my-6">
+        <div class="flex flex-col items-center justify-center w-full h-full absolute inset-0 bg-black/70 rounded-lg z-10">
+            <p class="font-extrabold sm:text-6xl text-4xl text-center text-white">Currently unavailable</p>
+            <p class="font-semibold text-3xl text-gray-200 text-center mt-8">Please <b class="text-white">call</b> us for assistance</p>
+        </div>
+
         <div class="sm:flex hidden text-xs flex-row justify-between items-center md:px-4 mb-2 text-gray-400">
             <span class="underline text-gray-800">Your Tyre Size</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
@@ -106,7 +111,7 @@
 
 <script setup>
 import { watch, ref, computed } from "vue";
-import { usePage, useForm, Head } from "@inertiajs/vue3"
+import {usePage, useForm, Head, router} from "@inertiajs/vue3"
 
 const tyre_sizes = computed(() => usePage().props.tyre_sizes)
 
@@ -174,9 +179,9 @@ function getOtherWidths() {
 
 function submit() {
     if(valid.value){
-        form.submit('post' ,'/search-tyres', {
-            preserveScroll: true
-        })
+        let url = '/tyre/'+form.width+form.profile+form.rim+'?postcode='+form.postcode
+
+        router.get(url)
     }
 }
 

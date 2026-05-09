@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col w-full pt-2 rounded-md bg-transparent border border-stone-800 text-stone-300 shadow-2xl font-montserrat">
+    <div class="flex flex-col w-full pt-2 rounded-md bg-gray-100 border border-gray-400 shadow-2xl font-montserrat">
         <div @click="open = !open" class="flex flex-row xl:justify-center justify-between items-center pb-2 xl:mb-8 xl:px-0 px-4">
             <div class="xl:hidden block">
                 <svg v-if="!open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

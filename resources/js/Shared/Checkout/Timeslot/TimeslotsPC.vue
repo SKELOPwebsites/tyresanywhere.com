@@ -68,7 +68,7 @@
 </template>
 
 <script setup>
-import Timeslot from "./Timeslot.vue";
+import Timeslot from "/resources/js/Shared/Checkout/Timeslot/Timeslot.vue";
 import {usePage} from "@inertiajs/vue3";
 
 defineProps({

@@ -37,6 +37,7 @@ const props = defineProps({
 
 const form = useForm({
     date: props.details.date,
+    sender: props.details.sender,
     name: props.details.name,
     phone: props.details.phone,
     email: props.details.email,
@@ -56,6 +57,7 @@ const form = useForm({
     payment_type: props.details.payment_type,
     amount_to_pay: props.details.amount_to_pay,
     recipient_email: props.details.recipient_email,
+    notes: props.details.notes,
 });
 
 function submit() {

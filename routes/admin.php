@@ -1,69 +1,91 @@
 <?php
 
-use App\Http\Controllers\AdminAreasController;
-use App\Http\Controllers\AdminAuthController;
-use App\Http\Controllers\AdminChargesController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AdminInvoiceController;
-use App\Http\Controllers\AdminLocalStockController;
-use App\Http\Controllers\AdminOrdersController;
-use App\Http\Controllers\AdminPostcodesController;
-use App\Http\Controllers\AdminTyresController;
-use App\Http\Controllers\AdminTyreSizesController;
+use App\Http\Controllers\Admin\AreasController;
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\ChargesController;
+use App\Http\Controllers\Admin\ConfigController;
+use App\Http\Controllers\Admin\InvoiceController;
+use App\Http\Controllers\Admin\LocalStockController;
+use App\Http\Controllers\Admin\OrdersController;
+use App\Http\Controllers\Admin\PostcodesController;
+use App\Http\Controllers\Admin\TyresController;
+use App\Http\Controllers\Admin\TyreSizesController;
+use App\Http\Controllers\Admin\TyreBrandsController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index']);
+    Route::get('/admin', function() {
+        return redirect('/admin/inventory');
+    });
 
     Route::prefix('/admin')->group(function() {
-        Route::post('/logout', [AdminAuthController::class, 'logout']);
+        Route::post('/logout', [AuthController::class, 'logout']);
 
-        Route::get('/manage-inventory', [AdminTyresController::class, 'index']);
+        Route::get('/view-products', [TyresController::class, 'index']);
 
-        Route::get('/tyres/create', [AdminTyresController::class, 'create']);
-        Route::post('/tyres', [AdminTyresController::class, 'store']);
-        Route::get('/tyres/{tyre}/edit', [AdminTyresController::class, 'edit']);
-        Route::put('/tyres/{tyre}', [AdminTyresController::class, 'update']);
-        Route::delete('/tyres/{tyre}', [AdminTyresController::class, 'destroy']);
+        Route::get('/tyres/create', [TyresController::class, 'create']);
+        Route::post('/tyres/create', [TyresController::class, 'store']);
+        Route::get('/tyres/{tyre}/edit', [TyresController::class, 'edit']);
+        Route::post('/products/{tyre}', [TyresController::class, 'update']);
+        Route::delete('/tyres/{tyre}', [TyresController::class, 'destroy']);
+        Route::put('/tyres/enable/{tyre}', [TyresController::class, 'enable']);
 
+        Route::get('/bulk-adjust-products', [TyresController::class, 'bulkAdjust']);
+        Route::post('/tyres/bulk-price', [TyresController::class, 'bulkPrice']);
+        Route::post('/tyres/bulk-action', [TyresController::class, 'bulkAction']);
 
-        Route::get('/manage-tyre-sizes', [AdminTyreSizesController::class, 'index']);
+        Route::get('/manage-tyre-sizes', [TyreSizesController::class, 'index']);
 
-        Route::post('/sizes', [AdminTyreSizesController::class, 'store']);
-        Route::delete('/sizes/{size}', [AdminTyreSizesController::class, 'destroy']);
+        Route::post('/sizes', [TyreSizesController::class, 'store']);
+        Route::delete('/sizes/{size}', [TyreSizesController::class, 'destroy']);
 
-        Route::get('/manage-local-stock', [AdminLocalStockController::class, 'index']);
-        Route::post('/manage-local-stock', [AdminLocalStockController::class, 'store']);
-        Route::put('/manage-local-stock/{tyre}', [AdminLocalStockController::class, 'update']);
-        Route::delete('/manage-local-stock/{tyre}', [AdminLocalStockController::class, 'destroy']);
+        Route::get('/inventory', [LocalStockController::class, 'index']);
+        Route::post('/inventory', [LocalStockController::class, 'store']);
+        Route::get('/inventory/show/{selected_category}', [LocalStockController::class, 'index']);
 
-        Route::get('/orders/active', [AdminOrdersController::class, 'activeIndex']);
-        Route::get('/orders/{order}/pdf', [AdminOrdersController::class, 'pdfInvoice']);
+        Route::get('/inventory/search', [LocalStockController::class, 'search']);
+        Route::post('/inventory/search', [LocalStockController::class, 'processSearch']);
 
-        Route::get('/orders/past', [AdminOrdersController::class, 'pastIndex']);
+        Route::put('/inventory/{tyre}', [LocalStockController::class, 'update']);
+        Route::post('/inventory/color', [LocalStockController::class, 'updateColor']);
+        Route::post('/inventory/sell-tyre', [LocalStockController::class, 'sellTyre']);
+        Route::delete('/inventory/{tyre}', [LocalStockController::class, 'destroy']);
 
-        Route::get('/charges', [AdminChargesController::class, 'index']);
-        Route::put('/charges/{service}', [AdminChargesController::class, 'update']);
+        Route::get('/manage-tyre-brands', [TyreBrandsController::class, 'index']);
+        Route::post('/manage-tyre-brands', [TyreBrandsController::class, 'store']);
+        Route::delete('/manage-tyre-brands/{brand}', [TyreBrandsController::class, 'destroy']);
 
-        Route::get('/covered-postcodes', [AdminPostcodesController::class, 'index']);
-        Route::post('/covered-postcodes', [AdminPostcodesController::class, 'store']);
-        Route::delete('/covered-postcodes/{postcode}', [AdminPostcodesController::class, 'destroy']);
+        Route::get('/orders/active', [OrdersController::class, 'activeIndex']);
+        Route::get('/orders/{order}/pdf', [OrdersController::class, 'pdfInvoice']);
 
-        Route::get('/covered-areas', [AdminAreasController::class, 'index']);
-        Route::post('/covered-areas', [AdminAreasController::class, 'store']);
-        Route::delete('/covered-areas/{area}', [AdminAreasController::class, 'destroy']);
+        Route::get('/orders', [OrdersController::class, 'pastIndex']);
+        Route::get('/invoices/{order_id}', [OrdersController::class, 'showInvoice']);
 
-        Route::get('/session', [AdminInvoiceController::class, 'session']);
-        Route::get('/pdf-invoice', [AdminInvoiceController::class, 'index']);
-        Route::post('/pdf-invoice', [AdminInvoiceController::class, 'store']);
+        Route::get('/service-charges', [ChargesController::class, 'index']);
+        Route::put('/service-charges/{service}', [ChargesController::class, 'update']);
 
-        Route::get('/pdf-invoice/preview', [AdminInvoiceController::class, 'previewInvoice']);
-        Route::get('/pdf-invoice/stream', [AdminInvoiceController::class, 'streamInvoice']);
-        Route::post('/pdf-invoice/send', [AdminInvoiceController::class, 'send']);
+        Route::get('/covered-postcodes', [PostcodesController::class, 'index']);
+        Route::post('/covered-postcodes', [PostcodesController::class, 'store']);
+        Route::delete('/covered-postcodes/{postcode}', [PostcodesController::class, 'destroy']);
+
+        Route::get('/covered-areas', [AreasController::class, 'index']);
+        Route::post('/covered-areas', [AreasController::class, 'store']);
+        Route::delete('/covered-areas/{area}', [AreasController::class, 'destroy']);
+
+        Route::get('/pdf-invoice', [InvoiceController::class, 'index']);
+        Route::post('/pdf-invoice', [InvoiceController::class, 'store']);
+
+        Route::get('/pdf-invoice/preview', [InvoiceController::class, 'previewInvoice']);
+        Route::get('/pdf-invoice/stream', [InvoiceController::class, 'streamInvoice']);
+        Route::post('/pdf-invoice/send', [InvoiceController::class, 'send']);
+
+        Route::get('/config', [ConfigController::class, 'index']);
+        Route::put('/config/{id}', [ConfigController::class, 'update']);
     });
 });
 
 Route::middleware(['guest'])->group(function () {
-    Route::get('/admin/login', [AdminAuthController::class, 'create']);
-    Route::post('/admin/login', [AdminAuthController::class, 'store']);
+    Route::get('/admin/login', [AuthController::class, 'create']);
+    Route::post('/admin/login', [AuthController::class, 'store']);
 });

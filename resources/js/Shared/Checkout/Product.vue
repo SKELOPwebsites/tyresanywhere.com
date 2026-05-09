@@ -1,9 +1,8 @@
 <template>
-    <div class="h-[500px] max-w-sm mx-auto flex flex-col items-center justify-start">
-        <div :class="`relative flex items-center justify-center bg-${convertToSlug(tyre.header)}-primary border-${convertToSlug(tyre.header)}-primary w-44 h-[30px] product-quality`">
-            <span :class="`text-${convertToSlug(tyre.header)}-secondary text-sm font-bold`" v-text="capitalize(tyre.header)"></span>
-        </div>
-
+    <div
+        class="h-[500px] max-w-sm mx-auto flex flex-col items-center justify-start rounded-lg overflow-hidden shadow-lg border"
+        :class="['border-'+tyre.quality+'-primary', 'shadow-'+tyre.quality+'-primary']"
+    >
         <div class="h-[120px] w-full bg-white overflow-hidden flex items-center justify-center product-head">
             <div class="w-2/5 shrink-0 pt-8">
                 <img class="w-full" :src="`/images/tyres/tyre/${tyre.brand.toLowerCase()}.webp`" onerror="this.onerror=null; this.src=`/images/tyres/tyre/sample.webp`" :alt="capitalize(tyre.brand)">
@@ -72,6 +71,7 @@
                     <div class="col-span-1">
                         <input v-model="form.tyre_id" type="hidden">
                         <select :disabled="inCart" v-model="form.quantity" class="block text-sm w-full py-1.5 px-3 bg-white border border-gray-300 rounded outline-0 focus:ring-2 focus:ring-wheelfit-600/40 focus:border-wheelfit-600 appearance-none">
+                            <option value="1">Qty: 1</option>
                             <option selected value="2">Qty: 2</option>
                             <option value="3">Qty: 3</option>
                             <option value="4">Qty: 4</option>

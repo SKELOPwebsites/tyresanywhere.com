@@ -19,7 +19,7 @@
 
 <script setup>
 import { Link } from "@inertiajs/vue3";
-import Footer from "./Footer.vue"
+import Footer from "/resources/js/Shared/Main/Footer.vue"
 
 </script>
 

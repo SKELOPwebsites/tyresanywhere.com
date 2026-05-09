@@ -109,7 +109,7 @@
 </template>
 
 <script>
-import CheckoutLayout from "../../Shared/CheckoutLayout.vue"
+import CheckoutLayout from "/resources/js/Shared/Layouts/CheckoutLayout.vue"
 
 export default {
     layout: CheckoutLayout
@@ -119,9 +119,9 @@ export default {
 <script setup>
 import { ref, watch } from "vue";
 import { router, Head, useForm, usePage, Link } from "@inertiajs/vue3"
-import Container from "../../Shared/Container.vue"
-import OrderSummary from "../../Shared/OrderSummary.vue"
-import Timeslots from "../../Shared/Timeslots.vue"
+import Container from "/resources/js/Shared/Main/Container.vue"
+import OrderSummary from "/resources/js/Shared/Checkout/OrderSummary/OrderSummary.vue"
+import Timeslots from "/resources/js/Shared/Checkout/Timeslot/Timeslots.vue"
 
 const props = defineProps({
     cart: {

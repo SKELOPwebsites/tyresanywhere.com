@@ -1,6 +1,6 @@
 <template>
     <Head>
-        <title>Admin Log In - Ace Tyres</title>
+        <title>Admin Log In - Tyres Anywhere</title>
     </Head>
     <div class="h-screen w-screen flex flex-col justify-center items-center px-2 sm:px-0 bg-gray-100">
         <p class="font-semibold text-xl">Admin Log In</p>

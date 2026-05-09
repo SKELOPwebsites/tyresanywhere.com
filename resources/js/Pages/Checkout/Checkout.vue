@@ -132,7 +132,7 @@
 </template>
 
 <script>
-import CheckoutLayout from "../../Shared/CheckoutLayout.vue"
+import CheckoutLayout from "/resources/js/Shared/Layouts/CheckoutLayout.vue"
 
 export default {
     layout: CheckoutLayout
@@ -143,8 +143,8 @@ export default {
 import { loadStripe } from "@stripe/stripe-js";
 import { router, Head, useForm } from "@inertiajs/vue3"
 import { ref, onMounted } from "vue"
-import Container from "../../Shared/Container.vue"
-import OrderSummary from "../../Shared/OrderSummary.vue"
+import Container from "/resources/js/Shared/Main/Container.vue"
+import OrderSummary from "/resources/js/Shared/Checkout/OrderSummary/OrderSummary.vue"
 import { Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
 
 const props = defineProps({

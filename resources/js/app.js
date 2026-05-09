@@ -1,8 +1,6 @@
-import '../css/app.css'
-
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
-import Layout from "./Shared/Layout.vue";
+import Layout from "/resources/js/Shared/Layouts/Layout.vue";
 
 import FloatingVue from 'floating-vue';
 import 'floating-vue/dist/style.css'

@@ -189,7 +189,7 @@
         <div class="w-3\/4 float-left">
             <img src="{{ public_path('images/main/tyresanywhere-bg.png') }}">
             <p class="text-sm" style="line-height: 0.5rem">Tyres Anywhere LTD</p>
-            <p class="text-sm" style="line-height: 0.5rem">07442 980101</p>
+            <p class="text-sm" style="line-height: 0.5rem">07989 606060</p>
             <p class="text-sm" style="line-height: 0.5rem">info@tyresanywhere.com</p>
             <p class="text-sm" style="line-height: 0.5rem">www.tyresanywhere.com</p>
             <br>
@@ -317,7 +317,7 @@
         <div class="w-3\/4 float-left">
             <img src="{{ public_path('images/main/tyresanywhere-bg.png') }}">
             <p class="text-sm" style="line-height: 0.5rem">Tyres Anywhere LTD</p>
-            <p class="text-sm" style="line-height: 0.5rem">07442 980101</p>
+            <p class="text-sm" style="line-height: 0.5rem">07989 606060</p>
             <p class="text-sm" style="line-height: 0.5rem">info@tyresanywhere.com</p>
             <p class="text-sm" style="line-height: 0.5rem">www.tyresanywhere.com</p>
             <br>

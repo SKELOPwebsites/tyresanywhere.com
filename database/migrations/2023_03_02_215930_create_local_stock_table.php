@@ -29,18 +29,19 @@ return new class extends Migration
             $table->string('price_bg')->default('#FFFFFF');
             $table->string('total_price_bg')->default('#FFFFFF');
             $table->string('quantity_bg')->default('#FFFFFF');
+
             $table->string('model_bg')->default('#FFFFFF');
             $table->string('notes_bg')->default('#FFFFFF');
             $table->string('sold_bg')->default('#FFFFFF');
 
-            $table->string('tyre_size_font')->default('#000000');
-            $table->string('brand_font')->default('#000000');
-            $table->string('price_font')->default('#000000');
-            $table->string('total_price_font')->default('#000000');
-            $table->string('quantity_font')->default('#000000');
-            $table->string('model_font')->default('#000000');
-            $table->string('notes_font')->default('#000000');
-            $table->string('sold_font')->default('#000000');
+            $table->string('tyre_size_font')->nullable();
+            $table->string('brand_font')->nullable();
+            $table->string('price_font')->nullable();
+            $table->string('total_price_font')->nullable();
+            $table->string('quantity_font')->nullable();
+            $table->string('model_font')->nullable();
+            $table->string('notes_font')->nullable();
+            $table->string('sold_font')->nullable();
         });
     }
 

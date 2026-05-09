@@ -1,9 +1,9 @@
 <template>
     <Head>
         <title>Your Cart | Tyres Anywhere LTD</title>
+        <meta name="description" content="Your Cart">
         <link rel="canonical" href="https://tyresanywhere.com/cart">
     </Head>
-
     <div class="bg-gray-200 pt-8">
         <Container v-if="cart" class="pb-56 grid grid-cols-12 gap-x-4 gap-y-4 items-start">
             <div class="2xl:col-span-9 xl:col-span-8 col-span-12 w-full sm:px-5 px-3 py-5 bg-white">
@@ -26,6 +26,13 @@
                     <span class="flex items-center justify-center mt-4 relative w-full rounded outline-0 h-[2rem] bg-gray-400 hover:cursor-not-allowed text-white font-semibold text-sm text-center uppercase transition duration-150 ease-in-out">
                         Unavailable
                     </span>
+
+                    <div class="text-xs  flex items-center bg-yellow-300 rounded-lg py-1 px-2 mt-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 shrink-0 mr-4">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                        </svg>
+                        <span>Site Maintenance: please call us to complete your order.</span>
+                    </div>
                 </div>
             </div>
         </Container>
@@ -51,21 +58,22 @@
 
 <script setup>
 import { Head } from "@inertiajs/vue3"
-import Container from "../../Shared/Container.vue"
-import CartTyre from "../../Shared/CartTyre.vue"
+import Container from "/resources/js/Shared/Main/Container.vue"
+import CartTyre from "/resources/js/Shared/Checkout/Cart/CartTyre.vue"
 
 defineProps({
     cart: {
         type: Object,
-        required: true,
+        required: false,
+        default: {}
     },
     subtotal: {
         type: String,
-        required: true,
+        required: false,
     },
     items: {
         type: Number,
-        required: true,
+        required: false,
     }
 })
 

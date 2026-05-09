@@ -117,7 +117,7 @@
 </template>
 
 <script>
-import CheckoutLayout from "../../Shared/CheckoutLayout.vue"
+import CheckoutLayout from "/resources/js/Shared/Layouts/CheckoutLayout.vue"
 
 export default {
     layout: CheckoutLayout
@@ -126,8 +126,8 @@ export default {
 
 <script setup>
 import { Head } from "@inertiajs/vue3"
-import Container from "../../Shared/Container.vue"
-import OrderSummaryTyre from "../../Shared/OrderSummaryTyre.vue"
+import Container from "/resources/js/Shared/Main/Container.vue"
+import OrderSummaryTyre from "/resources/js/Shared/Checkout/OrderSummary/OrderSummaryTyre.vue"
 
 defineProps({
     order_summary: {

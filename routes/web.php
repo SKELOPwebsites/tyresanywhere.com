@@ -21,72 +21,64 @@ use Inertia\Inertia;
 */
 
 
-
 Route::get('/', function () {
-    $areas = CoveredAreas::orderBy('area', 'asc')->get();
-
-    return Inertia::render('Index', [
-        'areas' => $areas->toArray()
-    ]);
+    return Inertia::render('Main/Index');
 });
 Route::get('/mobile-tyre-fitting', function () {
-    $areas = CoveredAreas::orderBy('area', 'asc')->get();
-
-    return Inertia::render('MobileTyreFitting', [
-        'areas' => $areas->toArray()
-    ]);
+    return Inertia::render('Main/MobileTyreFitting');
 });
 Route::get('/tyres', function () {
-    $areas = CoveredAreas::orderBy('area', 'asc')->get();
-
-    return Inertia::render('Tyres', [
-        'areas' => $areas->toArray()
-    ]);
+    return Inertia::render('Main/Tyres');
 });
 Route::get('/mobile-tyre-repair', function () {
-    $areas = CoveredAreas::orderBy('area', 'asc')->get();
-
-    return Inertia::render('MobileTyreRepair', [
-        'areas' => $areas->toArray()
-    ]);
+    return Inertia::render('Main/MobileTyreRepair');
 });
 Route::get('/commercial-tyres', function () {
-    $areas = CoveredAreas::orderBy('area', 'asc')->get();
-
-    return Inertia::render('CommercialTyres', [
-        'areas' => $areas->toArray()
-    ]);
+    return Inertia::render('Main/CommercialTyres');
+});
+Route::get('/breakdown-recovery', function () {
+    return Inertia::render('Main/BreakdownRecovery');
 });
 Route::get('/our-terms-and-conditions', function () {
-    return Inertia::render('TermsAndConditions');
+    return Inertia::render('Main/TermsAndConditions');
 });
 Route::get('/privacy-policy', function () {
-    return Inertia::render('PrivacyPolicy');
+    return Inertia::render('Main/PrivacyPolicy');
 });
 Route::get('/sitemap', function () {
-    return Inertia::render('Sitemap');
+    $areas = CoveredAreas::orderBy('slug', 'asc')->get()->groupBy(function($area) {
+        return strtoupper(substr($area['slug'], 0, 1));
+    })->toArray();
+
+    ksort($areas); // Sort the groups alphabetically by key (A-Z)
+
+    return Inertia::render('Main/Sitemap', [
+        'areas' => $areas
+    ]);
 });
 Route::get('/search-tyres', function () {
-    return Inertia::render('SearchTyres');
+    return Inertia::render('Main/SearchTyres');
 });
 Route::get('/locations/{area:slug}', function (CoveredAreas $area) {
-    $areas = CoveredAreas::orderBy('area', 'asc')->get();
-
-    return Inertia::render('Location', [
-        'areas' => $areas,
-        'location' => $area->area,
-        'slug' => $area->slug,
+    return Inertia::render('Main/Location', [
+        'location' => ucwords($area->area),
+        'slug' => $area->slug
     ]);
 });
 
 Route::get('/contact-us', [ContactController::class, 'index']);
 Route::post('/contact-us', [ContactController::class, 'store']);
 
-//search for a tyre
-Route::post('/search-tyres', [TyresController::class, 'store']);
 
-//display searched tyre
-Route::get('/search', [TyresController::class, 'index']);
+Route::get('/tyre/{size}', [TyresController::class, 'index']);
+
+Route::post('/tyre/filter', [TyresController::class, 'filter']);
+
+////search for a tyre
+//Route::post('/search-tyres', [TyresController::class, 'store']);
+//
+////display searched tyre
+//Route::get('/search', [TyresController::class, 'index']);
 
 
 Route::get('/cart', [CartController::class, 'index']);

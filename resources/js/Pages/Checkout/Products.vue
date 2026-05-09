@@ -1,42 +1,43 @@
 <template>
     <Head>
         <title>Products | Tyres Anywhere LTD</title>
+        <meta name="description" content="Products">
         <link rel="canonical" href="https://tyresanywhere.com/checkout/products">
     </Head>
 
-    <div class="hidden" hidden>
-        <div class="text-budget-secondary bg-budget-primary border-budget-primary"></div>
-        <div class="text-midrange-secondary bg-midrange-primary border-midrange-primary"></div>
-        <div class="text-premium-secondary bg-premium-primary border-premium-primary"></div>
-        <div class="text-high-performance-secondary bg-high-performance-primary border-high-performance-primary"></div>
-        <div class="text-best-budget-secondary bg-best-budget-primary border-best-budget-primary"></div>
-        <div class="text-best-selling-secondary bg-best-selling-primary border-best-selling-primary"></div>
-        <div class="text-popular-choice-secondary bg-popular-choice-primary border-popular-choice-primary"></div>
-        <div class="text-custom-secondary bg-custom-primary border-custom-primary"></div>
-    </div>
+    <Container class="font-montserrat">
+        <div class="py-12 sm:px-4 px-2">
+            <div class="grid grid-cols-12 gap-x-4 xl:gap-y-0 gap-y-4">
+                <div class="xl:col-span-2 col-span-12">
+                    <ProductFilter />
+                </div>
+                <div class="xl:col-span-10 col-span-12">
+                    <template v-if="recommended_tyres.length > 0">
+                        <RecommendedProducts @addToCart="addToCart" :recommended_tyres="recommended_tyres"/>
+                    </template>
+                    <div class="grid xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-x-6 sm:gap-y-12 gap-y-6">
+                        <Product @addToCart="addToCart" v-for="tyre in tyres" :tyre="tyre"></Product>
 
-    <div class="bg-gray-200">
-        <Container v-if="tyres.length > 0" class="py-12">
-            <div class="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 sm:gap-y-12 gap-y-6 lg:px-0 md:px-12">
-                <Product @addToCart="addToCart" v-for="tyre in tyres" :tyre="tyre"></Product>
-            </div>
-        </Container>
-        <Container v-else class="2xl:py-32 xl:py-28 lg:py-24 md:py-16 sm:py-6">
-            <div class="lg:w-[800px] md:w-[650px] sm:h-auto h-64 w-full px-5 py-5 bg-white mx-auto">
-                <div class="h-full flex items-center justify-center sm:space-x-12 relative overflow-hidden">
-                    <img class="md:w-56 md:h-56 sm:w-40 sm:h-40 h-full sm:static absolute top-0 bottom-0 left-1/2 sm:translate-x-0 -translate-x-1/2 object-contain object-center sm:opacity-100 opacity-50" src="/images/cart/empty-shopping-cart.png" alt="">
+                        <div v-if="tyres.length + recommended_tyres.length <= 0" class="container">
+                            <div class="lg:w-[800px] md:w-[650px] sm:h-auto h-64 w-full px-5 py-5  mx-auto">
+                                <div class="h-full flex items-center justify-center sm:space-x-12 relative overflow-hidden">
+                                    <img class="md:w-56 md:h-56 sm:w-40 sm:h-40 h-full sm:static absolute top-0 bottom-0 left-1/2 sm:translate-x-0 -translate-x-1/2 object-contain object-center sm:opacity-100 opacity-50" src="/images/cart/empty-shopping-cart.png" alt="">
 
-                    <div class="flex flex-col z-10">
-                        <span class="sm:text-2xl text-xl font-semibold">No products found!</span>
+                                    <div class="flex flex-col z-10">
+                                        <span class="sm:text-2xl text-xl font-semibold">No products found!</span>
 
-                        <a class="flex items-center justify-center mt-4 relative w-full rounded outline-0 h-[2.125rem] bg-green-500 hover:bg-green-600 text-white font-semibold text-base text-center uppercase transition duration-150 ease-in-out" href="/search-tyres">
-                            Search for Tyres
-                        </a>
+                                        <Link href="/" class="flex items-center justify-center mt-4 relative w-full rounded outline-0 h-[2.125rem] bg-green-500 hover:bg-green-600 text-white font-semibold text-base text-center uppercase transition duration-150 ease-in-out">
+                                            Search for Tyres
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </Container>
-    </div>
+        </div>
+    </Container>
 
 
     <Transition name="success">
@@ -48,10 +49,12 @@
 </template>
 
 <script setup>
-import { router, Head, usePage } from "@inertiajs/vue3"
+import { router, usePage, Head, Link } from "@inertiajs/vue3"
 import { computed, watch } from "vue"
-import Container from "../../Shared/Container.vue"
-import Product from "../../Shared/Product.vue"
+import Container from "/resources/js/Shared/Main/Container.vue"
+import Product from "/resources/js/Shared/Checkout/Product.vue"
+import ProductFilter from "/resources/js/Shared/Checkout/ProductFilter.vue"
+import RecommendedProducts from "/resources/js/Shared/Checkout/RecommendedProducts.vue"
 
 const cartSuccess = computed(() => usePage().props.flash.success.cart.add);
 
@@ -68,7 +71,8 @@ watch(cartSuccess, () => {
 })
 
 defineProps({
-    tyres: Object
+    tyres: Object,
+    recommended_tyres: Object,
 })
 
 function addToCart(form, inCart) {

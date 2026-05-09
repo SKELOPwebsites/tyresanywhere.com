@@ -1,5 +1,5 @@
 <template>
-    <div class="relative border-t border-stone-800" v-click-outside="() => open = false">
+    <div class="relative border-t border-gray-400" v-click-outside="() => open = false">
         <div @click="open = !open" class="cursor-pointer">
             <button type="button" class="w-full flex items-center justify-start select-none text-xs px-2 py-3 font-semibold border-gray-300 cursor-pointer">
                 <span class="text-site-400" v-text="name"></span>
@@ -12,10 +12,10 @@
 
         <Transition>
             <div v-show="open"
-                 class="absolute z-50 right-0 top-0 translate-x-full flex drop-shadow-[0_10px_8px_rgba(255,255,255,0.5)]"
+                 class="absolute z-50 right-0 top-0 translate-x-full flex drop-shadow-[0_10px_8px_rgba(0,0,0,0.5)]"
             >
-                <div class="w-0 h-0 border-r-stone-700 border-t-[20px] border-b-[20px] border-r-[20px] border-b-transparent border-t-transparent"></div>
-                <div class="rounded-r-md rounded-bl-md overflow-hidden bg-stone-700 -ml-px px-4 pt-4 -translate-y-6 w-[600px]">
+                <div class="w-0 h-0 border-r-white border-t-[20px] border-b-[20px] border-r-[20px] border-b-transparent border-t-transparent"></div>
+                <div class="rounded-r-md rounded-bl-md overflow-hidden bg-white -ml-px px-4 pt-4 -translate-y-6 w-[600px]">
                     <div class="flex justify-between pb-2">
                         <span>Select Brand</span>
                         <button class="text-site-400 underline" @click="open = false">Close</button>
@@ -31,7 +31,7 @@
                     </template>
                     <template v-else>
                         <div v-for="optionGroup in options">
-                            <div class="py-2 px-4 bg-stone-600" v-text="optionGroup.name"></div>
+                            <div class="py-2 px-4 bg-gray-200" v-text="optionGroup.name"></div>
                             <div class="grid grid-cols-3 gap-y-2 px-4 py-2">
                                 <button @click="update(option)" v-for="option in optionGroup.options" class="col-span-1 py-2 group flex justify-start text-xs">
                                     <span class="mr-2 group-hover:underline group-hover:text-site-400" v-text="option"></span>

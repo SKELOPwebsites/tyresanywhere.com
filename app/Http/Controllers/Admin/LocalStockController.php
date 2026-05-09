@@ -77,6 +77,7 @@ class LocalStockController extends Controller
             'brand' => ['required', 'string'],
             'cost' => ['required', 'numeric', 'min:0'],
             'quantity' => ['required', 'numeric', 'min:0'],
+            'desired_quantity' => ['required', 'numeric', 'min:0'],
             'model' => ['nullable', 'string'],
             'notes' => ['nullable', 'string'],
             'sold' => ['nullable', 'numeric', 'min:0'],
@@ -99,6 +100,7 @@ class LocalStockController extends Controller
             'brand' => ['required', 'string'],
             'cost' => ['required', 'numeric', 'min:0'],
             'quantity' => ['required', 'numeric', 'min:0'],
+            'desired_quantity' => ['required', 'numeric', 'min:0'],
             'model' => ['nullable', 'string'],
             'notes' => ['nullable', 'string'],
             'sold' => ['nullable', 'numeric', 'min:0'],
@@ -114,6 +116,7 @@ class LocalStockController extends Controller
         $tyre->model = $request->get('model');
         $tyre->cost = $request->get('cost');
         $tyre->quantity = $request->get('quantity');
+        $tyre->desired_quantity = $request->get('desired_quantity');
         $tyre->notes = $request->get('notes');
         $tyre->sold = $request->get('sold');
 
