@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('user_id');
             $table->string('transaction_id');
             $table->integer('total')->default(0);
+            $table->integer('remaining')->default(0);
             $table->timestamps();
         });
     }

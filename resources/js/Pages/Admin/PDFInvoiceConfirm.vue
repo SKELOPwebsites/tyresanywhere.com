@@ -2,7 +2,6 @@
     <Head>
         <title>PDF Invoice</title>
     </Head>
-
     <iframe
         class="w-screen h-screen"
         :src="'/admin/pdf-invoice/stream'"
@@ -14,7 +13,7 @@
 </template>
 
 <script>
-import AdminLayout from "../../Shared/AdminLayout.vue"
+import AdminLayout from "/resources/js/Shared/Layouts/AdminLayout.vue"
 export default {
     layout: AdminLayout
 }
@@ -22,7 +21,7 @@ export default {
 
 <script setup>
 import { useForm, Head, Link, usePage } from "@inertiajs/vue3"
-import Container from "../../Shared/Container.vue";
+
 import {computed, watch} from "vue";
 
 const props = defineProps({

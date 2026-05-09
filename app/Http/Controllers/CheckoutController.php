@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Configuration;
 use App\Models\Postcode;
 use App\Models\ServiceFee;
 use App\Models\Timeslot;
@@ -45,6 +46,8 @@ class CheckoutController extends Controller
 
         $total = $subtotal + ($fitting->price * $tyres) + $callout->price + ($disposal->price * $tyres);
 
+        $deposit_percentage = Configuration::where('key', 'deposit_percentage')->first()->value;
+
         if($request->session()->has('cart.details')){
             return Inertia::render('Checkout/Checkout', [
                 'tyre' => $tyre,
@@ -56,10 +59,11 @@ class CheckoutController extends Controller
                     'disposal' => number_format($tyres * $disposal->price, 2),
                     'disposal_cost' => number_format($disposal->price, 2),
                     'total' => number_format($total, 2),
-                    'total_later' => number_format(($total * 0.75), 2),
-                    'total_today' => number_format(($total * 0.25), 2),
-                    'total_later_pence' => round(($total * 75)),
-                    'total_today_pence' => round(($total * 25)),
+                    'deposit_percentage' => $deposit_percentage,
+                    'total_later' => number_format(($total * ((100-$deposit_percentage)/100)), 2),
+                    'total_today' => number_format(($total * ($deposit_percentage/100)), 2),
+                    'total_later_pence' => round(($total * (100-$deposit_percentage))),
+                    'total_today_pence' => round(($total * $deposit_percentage)),
                 ],
                 'fitting_details' => $request->session()->get('cart.details'),
                 'timeslot' => $request->session()->get('cart.timeslot')
@@ -77,8 +81,9 @@ class CheckoutController extends Controller
                     'disposal' => number_format($tyres * $disposal->price, 2),
                     'disposal_cost' => number_format($disposal->price, 2),
                     'total' => number_format($total, 2),
-                    'total_later' => number_format(($total * 0.75), 2),
-                    'total_today' => number_format(($total * 0.25), 2),
+                    'deposit_percentage' => $deposit_percentage,
+                    'total_later' => number_format(($total * ((100-$deposit_percentage)/100)), 2),
+                    'total_today' => number_format(($total * ($deposit_percentage/100)), 2),
                 ]
             ]);
         }
@@ -90,7 +95,6 @@ class CheckoutController extends Controller
             'email' => ['required', 'email'],
             'postcode' => ['nullable'],
             'addressLine1' => ['required', 'string', 'max:255'],
-            'addressLine2' => ['nullable', 'string', 'max:255'],
             'town' => ['required', 'string', 'max:255'],
             'registration' => ['required', 'string', 'max:9'],
         ]);
@@ -137,7 +141,6 @@ class CheckoutController extends Controller
             'phone' => $request['phone'],
             'email' => $request['email'],
             'addressLine1' => $request['addressLine1'],
-            'addressLine2' => $request['addressLine2'],
             'town' => $request['town'],
             'postcode' => $request->session()->get('cart.postcode'),
             'registration' => $request['registration'],

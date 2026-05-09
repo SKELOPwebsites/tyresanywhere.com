@@ -1,178 +1,156 @@
 <template>
     <Head>
-        <title>Admin - Tyres Anywhere LTD</title>
+        <title>Admin - Ace Tyres</title>
     </Head>
 
-    <Container class="mt-12">
-        <div class="grid grid-cols-12 lg:items-start gap-x-4">
-            <div class="group lg:col-span-3 sm:col-span-6 col-span-12">
-                <div class="w-full border-2 border-gray-400 text-gray-600 rounded-lg px-4 h-12 cursor-pointer flex items-center justify-between group-hover:text-black group-hover:border-gray-700 transition duration-150 ease-in-out">
-                    <div class="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="lg:h-8 sm:h-6 h-4 lg:w-8 sm:w-6 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M19.66 9.64L19.3 8.7L21.16 8C20.24 5.88 18.6 4.18 16.54 3.14L15.74 4.92L14.82 4.5L15.62 2.7C14.5 2.26 13.28 2 12 2C10.94 2 9.92 2.22 8.96 2.5L9.64 4.34L8.7 4.7L8 2.84C5.88 3.76 4.18 5.4 3.14 7.46L4.92 8.26L4.5 9.18L2.7 8.38C2.26 9.5 2 10.72 2 12C2 13.06 2.22 14.08 2.5 15.04L4.34 14.36L4.7 15.3L2.84 16C3.76 18.12 5.4 19.82 7.46 20.86L8.26 19.08L9.18 19.5L8.38 21.3C9.5 21.74 10.72 22 12 22C13.06 22 14.08 21.78 15.04 21.5L14.36 19.66L15.3 19.3L16 21.16C18.12 20.24 19.82 18.6 20.86 16.54L19.08 15.74L19.5 14.82L21.3 15.62C21.74 14.5 22 13.28 22 12C22 10.94 21.78 9.92 21.5 8.96L19.66 9.64M14.3 17.54C11.24 18.8 7.72 17.36 6.46 14.3S6.64 7.72 9.7 6.46 16.28 6.64 17.54 9.7C18.82 12.76 17.36 16.28 14.3 17.54Z"></path></svg>
-                        <span class="uppercase font-bold lg:text-lg sm:text-base text-sm ml-2">Tyre</span>
-                    </div>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                </div>
+    <div id="home">
 
-                <div class="h-0 overflow-hidden group-hover:h-48 flex flex-col mt-4 border-x transition-all duration-300 ease-in-out">
-                    <Link href="/admin/tyres/create" class="w-full text-gray-700">
-                        <div class="flex items-center hover:translate-x-2 py-3 px-2 transition duration-150 ease-in-out">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                                <path fill-rule="evenodd" d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="xl:text-base text-sm">Add Tyre</span>
-                        </div>
-                    </Link>
-                    <Link href="/admin/manage-inventory" class="w-full text-gray-700">
-                        <div class="flex items-center hover:translate-x-2 py-3 px-2 transition duration-150 ease-in-out">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                                <path fill-rule="evenodd" d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="xl:text-base text-sm">Manage Inventory</span>
-                        </div>
-                    </Link>
-                    <Link href="/admin/manage-tyre-sizes" class="group w-full text-gray-700">
-                        <div class="flex items-center hover:translate-x-2 py-3 px-2 transition duration-150 ease-in-out">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                                <path fill-rule="evenodd" d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="xl:text-base text-sm">Manage Tyre Sizes</span>
-                        </div>
-                    </Link>
-                    <Link href="/admin/manage-local-stock" class="group w-full text-gray-700">
-                        <div class="flex items-center hover:translate-x-2 py-3 px-2 transition duration-150 ease-in-out">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                                <path fill-rule="evenodd" d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="xl:text-base text-sm">Manage Local Stock</span>
-                        </div>
-                    </Link>
-                </div>
-            </div>
-            <div class="group lg:col-span-3 sm:col-span-6 col-span-12">
-                <div class="w-full border-2 border-gray-400 text-gray-600 rounded-lg px-4 h-12 cursor-pointer flex items-center justify-between group-hover:text-black group-hover:border-gray-700 transition duration-150 ease-in-out">
-                    <div class="flex items-center">
-                        <svg class="lg:h-8 sm:h-6 h-4 lg:w-8 sm:w-6 w-4" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="9" y="8" width="30" height="36" rx="2" fill="#ffffff" stroke="currentColor" stroke-width="4" stroke-linejoin="round"></rect>
-                            <path d="M18 4V10" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
-                            <path d="M30 4V10" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
-                            <path d="M16 19L32 19" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
-                            <path d="M16 27L28 27" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
-                            <path d="M16 35H24" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                        <span class="uppercase font-bold lg:text-lg sm:text-base text-sm ml-2">Orders</span>
-                    </div>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                </div>
+        <!-- breadcrumb -->
+        <nav class="text-sm font-semibold mb-6" aria-label="Breadcrumb">
+            <ol class="list-none p-0 inline-flex">
+                <li class="flex items-center text-blue-500">
+                    <a href="#" class="text-gray-700">Home</a>
+                    <svg class="fill-current w-3 h-3 mx-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg>
+                </li>
+                <li class="flex items-center">
+                    <a href="#" class="text-gray-600">Dashboard</a>
+                </li>
+            </ol>
+        </nav>
+        <!-- breadcrumb end -->
 
-                <div class="h-0 overflow-hidden group-hover:h-24 flex flex-col mt-4 border-x transition-all duration-300 ease-in-out">
-                    <Link href="/admin/orders/active" class="w-full text-gray-700">
-                        <div class="flex items-center hover:translate-x-2 py-3 px-2 transition duration-150 ease-in-out">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                                <path fill-rule="evenodd" d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="xl:text-base text-sm">Active Orders</span>
-                        </div>
-                    </Link>
-                    <Link href="/admin/orders/past" class="group w-full text-gray-700">
-                        <div class="flex items-center hover:translate-x-2 py-3 px-2 transition duration-150 ease-in-out">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                                <path fill-rule="evenodd" d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="xl:text-base text-sm">Past Orders</span>
-                        </div>
-                    </Link>
-                </div>
-            </div>
-            <div class="group lg:col-span-3 sm:col-span-6 col-span-12">
-                <div class="w-full border-2 border-gray-400 text-gray-600 rounded-lg px-4 h-12 cursor-pointer flex items-center justify-between group-hover:text-black group-hover:border-gray-700 transition duration-150 ease-in-out">
-                    <div class="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="lg:h-8 sm:h-6 h-4 lg:w-8 sm:w-6 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M14.17,13.71l1.4-2.42c0.09-0.15,0.05-0.34-0.08-0.45l-1.48-1.16c0.03-0.22,0.05-0.45,0.05-0.68s-0.02-0.46-0.05-0.69 l1.48-1.16c0.13-0.11,0.17-0.3,0.08-0.45l-1.4-2.42c-0.09-0.15-0.27-0.21-0.43-0.15L12,4.83c-0.36-0.28-0.75-0.51-1.18-0.69 l-0.26-1.85C10.53,2.13,10.38,2,10.21,2h-2.8C7.24,2,7.09,2.13,7.06,2.3L6.8,4.15C6.38,4.33,5.98,4.56,5.62,4.84l-1.74-0.7 c-0.16-0.06-0.34,0-0.43,0.15l-1.4,2.42C1.96,6.86,2,7.05,2.13,7.16l1.48,1.16C3.58,8.54,3.56,8.77,3.56,9s0.02,0.46,0.05,0.69 l-1.48,1.16C2,10.96,1.96,11.15,2.05,11.3l1.4,2.42c0.09,0.15,0.27,0.21,0.43,0.15l1.74-0.7c0.36,0.28,0.75,0.51,1.18,0.69 l0.26,1.85C7.09,15.87,7.24,16,7.41,16h2.8c0.17,0,0.32-0.13,0.35-0.3l0.26-1.85c0.42-0.18,0.82-0.41,1.18-0.69l1.74,0.7 C13.9,13.92,14.08,13.86,14.17,13.71z M8.81,11c-1.1,0-2-0.9-2-2c0-1.1,0.9-2,2-2s2,0.9,2,2C10.81,10.1,9.91,11,8.81,11z"></path><path d="M21.92,18.67l-0.96-0.74c0.02-0.14,0.04-0.29,0.04-0.44c0-0.15-0.01-0.3-0.04-0.44l0.95-0.74 c0.08-0.07,0.11-0.19,0.05-0.29l-0.9-1.55c-0.05-0.1-0.17-0.13-0.28-0.1l-1.11,0.45c-0.23-0.18-0.48-0.33-0.76-0.44l-0.17-1.18 C18.73,13.08,18.63,13,18.53,13h-1.79c-0.11,0-0.21,0.08-0.22,0.19l-0.17,1.18c-0.27,0.12-0.53,0.26-0.76,0.44l-1.11-0.45 c-0.1-0.04-0.22,0-0.28,0.1l-0.9,1.55c-0.05,0.1-0.04,0.22,0.05,0.29l0.95,0.74c-0.02,0.14-0.03,0.29-0.03,0.44 c0,0.15,0.01,0.3,0.03,0.44l-0.95,0.74c-0.08,0.07-0.11,0.19-0.05,0.29l0.9,1.55c0.05,0.1,0.17,0.13,0.28,0.1l1.11-0.45 c0.23,0.18,0.48,0.33,0.76,0.44l0.17,1.18c0.02,0.11,0.11,0.19,0.22,0.19h1.79c0.11,0,0.21-0.08,0.22-0.19l0.17-1.18 c0.27-0.12,0.53-0.26,0.75-0.44l1.12,0.45c0.1,0.04,0.22,0,0.28-0.1l0.9-1.55C22.03,18.86,22,18.74,21.92,18.67z M17.63,18.83 c-0.74,0-1.35-0.6-1.35-1.35s0.6-1.35,1.35-1.35s1.35,0.6,1.35,1.35S18.37,18.83,17.63,18.83z"></path></svg>
-                        <span class="uppercase font-bold lg:text-lg sm:text-base text-sm ml-2">Charges</span>
-                    </div>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                </div>
-
-                <div class="h-0 overflow-hidden group-hover:h-12 flex flex-col mt-4 border-x transition-all duration-300 ease-in-out">
-                    <Link href="/admin/charges" class="group w-full text-gray-700">
-                        <div class="flex items-center hover:translate-x-2 py-3 px-2 transition duration-150 ease-in-out">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                                <path fill-rule="evenodd" d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="xl:text-base text-sm">Service Charges</span>
-                        </div>
-                    </Link>
-                </div>
-            </div>
-            <div class="group lg:col-span-3 sm:col-span-6 col-span-12">
-                <div class="w-full border-2 border-gray-400 text-gray-600 rounded-lg px-4 h-12 cursor-pointer flex items-center justify-between group-hover:text-black group-hover:border-gray-700 transition duration-150 ease-in-out">
-                    <div class="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="lg:h-8 sm:h-6 h-4 lg:w-8 sm:w-6 w-4" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                        </svg>
-                        <span class="uppercase font-bold lg:text-lg sm:text-base text-sm ml-2">Other</span>
-                    </div>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                </div>
-
-                <div class="h-0 overflow-hidden group-hover:h-36 flex flex-col mt-4 border-x transition-all duration-300 ease-in-out">
-                    <Link href="/admin/covered-postcodes" class="w-full text-gray-700">
-                        <div class="flex items-center hover:translate-x-2 py-3 px-2 transition duration-150 ease-in-out">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                                <path fill-rule="evenodd" d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="xl:text-base text-sm">Covered Postcodes</span>
-                        </div>
-                    </Link>
-                    <Link href="/admin/covered-areas" class="group w-full text-gray-700">
-                        <div class="flex items-center hover:translate-x-2 py-3 px-2 transition duration-150 ease-in-out">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                                <path fill-rule="evenodd" d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="xl:text-base text-sm">Covered Areas</span>
-                        </div>
-                    </Link>
-                    <Link href="/admin/pdf-invoice" class="group w-full text-gray-700">
-                        <div class="flex items-center hover:translate-x-2 py-3 px-2 transition duration-150 ease-in-out">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                                <path fill-rule="evenodd" d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="xl:text-base text-sm">PDF Invoice</span>
-                        </div>
-                    </Link>
-                </div>
-            </div>
+        <div class="lg:flex justify-between items-center mb-6">
+            <p class="text-2xl font-semibold mb-2 lg:mb-0">Good afternoon, Joe!</p>
+            <button class="bg-blue-500 hover:bg-blue-600 focus:outline-none rounded-lg px-6 py-2 text-white font-semibold shadow">View Logs</button>
         </div>
-    </Container>
+
+        <div class="flex flex-wrap -mx-3 mb-20">
+
+            <div class="w-1/2 xl:w-1/4 px-3">
+                <div class="w-full bg-white border text-blue-400 rounded-lg flex items-center p-6 mb-6 xl:mb-0">
+                    <svg class="w-16 h-16 fill-current mr-4 hidden lg:block" viewBox="0 0 20 20">
+                        <path d="M17.35,2.219h-5.934c-0.115,0-0.225,0.045-0.307,0.128l-8.762,8.762c-0.171,0.168-0.171,0.443,0,0.611l5.933,5.934c0.167,0.171,0.443,0.169,0.612,0l8.762-8.763c0.083-0.083,0.128-0.192,0.128-0.307V2.651C17.781,2.414,17.587,2.219,17.35,2.219M16.916,8.405l-8.332,8.332l-5.321-5.321l8.333-8.332h5.32V8.405z M13.891,4.367c-0.957,0-1.729,0.772-1.729,1.729c0,0.957,0.771,1.729,1.729,1.729s1.729-0.772,1.729-1.729C15.619,5.14,14.848,4.367,13.891,4.367 M14.502,6.708c-0.326,0.326-0.896,0.326-1.223,0c-0.338-0.342-0.338-0.882,0-1.224c0.342-0.337,0.881-0.337,1.223,0C14.84,5.826,14.84,6.366,14.502,6.708"></path>
+                    </svg>
+
+                    <div class="text-gray-700">
+                        <p class="font-semibold text-3xl">237</p>
+                        <p>Products Sold</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="w-1/2 xl:w-1/4 px-3">
+                <div class="w-full bg-white border text-blue-400 rounded-lg flex items-center p-6 mb-6 xl:mb-0">
+                    <svg class="w-16 h-16 fill-current mr-4 hidden lg:block" viewBox="0 0 20 20">
+                        <path d="M17.684,7.925l-5.131-0.67L10.329,2.57c-0.131-0.275-0.527-0.275-0.658,0L7.447,7.255l-5.131,0.67C2.014,7.964,1.892,8.333,2.113,8.54l3.76,3.568L4.924,17.21c-0.056,0.297,0.261,0.525,0.533,0.379L10,15.109l4.543,2.479c0.273,0.153,0.587-0.089,0.533-0.379l-0.949-5.103l3.76-3.568C18.108,8.333,17.986,7.964,17.684,7.925 M13.481,11.723c-0.089,0.083-0.129,0.205-0.105,0.324l0.848,4.547l-4.047-2.208c-0.055-0.03-0.116-0.045-0.176-0.045s-0.122,0.015-0.176,0.045l-4.047,2.208l0.847-4.547c0.023-0.119-0.016-0.241-0.105-0.324L3.162,8.54L7.74,7.941c0.124-0.016,0.229-0.093,0.282-0.203L10,3.568l1.978,4.17c0.053,0.11,0.158,0.187,0.282,0.203l4.578,0.598L13.481,11.723z"></path>
+                    </svg>
+
+                    <div class="text-gray-700">
+                        <p class="font-semibold text-3xl">177</p>
+                        <p>Product Reviews</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-1/2 xl:w-1/4 px-3">
+                <div class="w-full bg-white border text-blue-400 rounded-lg flex items-center p-6">
+                    <svg class="w-16 h-16 fill-current mr-4 hidden lg:block" viewBox="0 0 20 20">
+                        <path d="M14.999,8.543c0,0.229-0.188,0.417-0.416,0.417H5.417C5.187,8.959,5,8.772,5,8.543s0.188-0.417,0.417-0.417h9.167C14.812,8.126,14.999,8.314,14.999,8.543 M12.037,10.213H5.417C5.187,10.213,5,10.4,5,10.63c0,0.229,0.188,0.416,0.417,0.416h6.621c0.229,0,0.416-0.188,0.416-0.416C12.453,10.4,12.266,10.213,12.037,10.213 M14.583,6.046H5.417C5.187,6.046,5,6.233,5,6.463c0,0.229,0.188,0.417,0.417,0.417h9.167c0.229,0,0.416-0.188,0.416-0.417C14.999,6.233,14.812,6.046,14.583,6.046 M17.916,3.542v10c0,0.229-0.188,0.417-0.417,0.417H9.373l-2.829,2.796c-0.117,0.116-0.71,0.297-0.71-0.296v-2.5H2.5c-0.229,0-0.417-0.188-0.417-0.417v-10c0-0.229,0.188-0.417,0.417-0.417h15C17.729,3.126,17.916,3.313,17.916,3.542 M17.083,3.959H2.917v9.167H6.25c0.229,0,0.417,0.187,0.417,0.416v1.919l2.242-2.215c0.079-0.077,0.184-0.12,0.294-0.12h7.881V3.959z"></path>
+                    </svg>
+
+                    <div class="text-gray-700">
+                        <p class="font-semibold text-3xl">31</p>
+                        <p>New Enquiries</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-1/2 xl:w-1/4 px-3">
+                <div class="w-full bg-white border text-blue-400 rounded-lg flex items-center p-6">
+                    <svg class="w-16 h-16 fill-current mr-4 hidden lg:block" viewBox="0 0 20 20">
+                        <path d="M17.431,2.156h-3.715c-0.228,0-0.413,0.186-0.413,0.413v6.973h-2.89V6.687c0-0.229-0.186-0.413-0.413-0.413H6.285c-0.228,0-0.413,0.184-0.413,0.413v6.388H2.569c-0.227,0-0.413,0.187-0.413,0.413v3.942c0,0.228,0.186,0.413,0.413,0.413h14.862c0.228,0,0.413-0.186,0.413-0.413V2.569C17.844,2.342,17.658,2.156,17.431,2.156 M5.872,17.019h-2.89v-3.117h2.89V17.019zM9.587,17.019h-2.89V7.1h2.89V17.019z M13.303,17.019h-2.89v-6.651h2.89V17.019z M17.019,17.019h-2.891V2.982h2.891V17.019z"></path>
+                    </svg>
+
+                    <div class="text-gray-700">
+                        <p class="font-semibold text-3xl">1,653</p>
+                        <p>Product Views</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="flex flex-wrap -mx-3">
+
+            <div class="w-full xl:w-1/3 px-3">
+                <p class="text-xl font-semibold mb-4">Recent Sales</p>
+
+                <div class="w-full bg-white border rounded-lg p-4 mb-8 xl:mb-0">
+                    <canvas id="buyers-chart" width="600" height="400"></canvas>
+                </div>
+            </div>
+
+            <div class="w-full xl:w-1/3 px-3">
+                <p class="text-xl font-semibold mb-4">Recent Reviews</p>
+
+                <div class="w-full bg-white border rounded-lg p-4 mb-8 xl:mb-0">
+                    <canvas id="reviews-chart" width="600" height="400"></canvas>
+                </div>
+            </div>
+
+            <div class="w-full xl:w-1/3 px-3">
+                <p class="text-xl font-semibold mb-4">Recent Transactions</p>
+                <div class="w-full bg-white border rounded-lg p-4">
+                    <div class="w-full bg-gray-100 border rounded-lg flex justify-between items-center px-4 py-2 mb-4">
+                        <div>
+                            <p class="font-semibold text-xl">Trent Murphy</p>
+                            <p>Product 1</p>
+                        </div>
+                        <span class="text-green-500 font-semibold text-lg">$25.00</span>
+                    </div>
+
+                    <div class="w-full bg-gray-100 border rounded-lg flex justify-between items-center px-4 py-2 mb-4">
+                        <div>
+                            <p class="font-semibold text-xl">Joseph Brent</p>
+                            <p>Product 34</p>
+                        </div>
+                        <span class="text-red-500 font-semibold text-lg">$74.99</span>
+                    </div>
+
+                    <div class="w-full bg-gray-100 border rounded-lg flex justify-between items-center px-4 py-2 mb-4">
+                        <div>
+                            <p class="font-semibold text-xl">Jacob Bator</p>
+                            <p>Product 23</p>
+                        </div>
+                        <span class="text-green-500 font-semibold text-lg">$14.95</span>
+                    </div>
+
+                    <div class="w-full bg-gray-100 border rounded-lg flex justify-between items-center px-4 py-2">
+                        <div>
+                            <p class="font-semibold text-xl">Alex Mason</p>
+                            <p>Product 66</p>
+                        </div>
+                        <span class="text-green-500 font-semibold text-lg">$44.99</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
 </template>
 
 <script>
-import AdminLayout from "../../Shared/AdminLayout.vue"
+import AdminLayout from "/resources/js/Shared/Layouts/AdminLayout.vue"
 export default {
     layout: AdminLayout
 }
 </script>
 
 <script setup>
-import Container from "../../Shared/Container.vue"
+
 import { Link, Head } from "@inertiajs/vue3"
 
 </script>

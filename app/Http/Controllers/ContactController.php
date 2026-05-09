@@ -13,7 +13,7 @@ class ContactController extends Controller
 {
     public function index(Request $request)
     {
-        return Inertia::render('ContactUs', [
+        return Inertia::render('Main/ContactUs', [
             'success' => $request->session()->get('success')
         ]);
     }

@@ -2,7 +2,7 @@
     <Head>
         <title>Covered Areas</title>
     </Head>
-    <Container>
+    <div class="container">
         <div class="lg:w-1/3 w-full mx-auto pt-8">
             <p class="font-semibold text-3xl text-center mb-8">Covered Areas</p>
 
@@ -12,7 +12,7 @@
                         v-model="form.area"
                         type="text"
                         class="py-2 px-3 text-sm border outline-0 rounded shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-25 w-full"
-                        placeholder="Outcode"
+                        placeholder="Area"
                     >
                 </div>
                 <div class="col-span-3">
@@ -41,7 +41,7 @@
                 </div>
             </div>
         </div>
-    </Container>
+    </div>
 
     <Transition name="success">
         <div v-show="success" v-text="success" class="fixed md:bottom-8 md:right-8 bottom-4 sm:right-4 sm:left-auto left-1/2 sm:translate-x-0 -translate-x-1/2 sm:px-4 px-2 py-2 bg-green-500/80 text-white sm:text-sm text-xs whitespace-nowrap rounded-lg font-semibold"></div>
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import AdminLayout from "../../Shared/AdminLayout.vue"
+import AdminLayout from "/resources/js/Shared/Layouts/AdminLayout.vue"
 export default {
     layout: AdminLayout
 }
@@ -59,7 +59,7 @@ export default {
 
 <script setup>
 import { router, useForm, Head, Link, usePage } from "@inertiajs/vue3"
-import Container from "../../Shared/Container.vue";
+
 import {computed, watch} from "vue";
 
 const props = defineProps({

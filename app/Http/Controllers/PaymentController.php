@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Mail\OrderMail;
+use App\Models\Configuration;
 use App\Models\Order;
+use App\Models\OrderSnapshot;
 use App\Models\Postcode;
 use App\Models\ServiceFee;
 use App\Models\Timeslot;
+use App\Models\Tyre;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use DateTime;
@@ -14,9 +17,11 @@ use DateTimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
+use Ramsey\Uuid\Type\Time;
 
 class PaymentController extends Controller
 {
@@ -30,11 +35,9 @@ class PaymentController extends Controller
             'phone' => ['required', 'numeric', 'digits:11'],
             'registration' => ['required', 'string', 'max:9'],
             'addressLine1' => ['required', 'string', 'max:255'],
-            'addressLine2' => ['nullable', 'string', 'max:255'],
             'town' => ['required', 'string', 'max:255'],
             'postcode' => ['required', 'string', 'max:255'],
             'fitting_addressLine1' => ['required', 'string', 'max:255'],
-            'fitting_addressLine2' => ['nullable', 'string', 'max:255'],
             'fitting_town' => ['required', 'string', 'max:255'],
             'fitting_postcode' => ['required', 'string', 'max:255'],
 
@@ -45,7 +48,6 @@ class PaymentController extends Controller
             'timeslot.to' => ['required', 'string', Rule::in(['8AM', '10AM', '12PM', '2PM', '4PM', '6PM', '8PM', '10PM'])],
 
             'payment_method_id' => ['required'],
-            'amount' => ['required', 'numeric'],
             'cart' => ['required', 'string'],
         ]);
 
@@ -55,51 +57,73 @@ class PaymentController extends Controller
         //validate timeslot
         $this->validateTimeslot($request);
 
-        $user = User::create([
-            'firstname' => $request['firstname'],
-            'lastname' => $request['lastname'],
-            'email' => $request['email'],
-            'phone' => $request['phone'],
-            'registration' => strtoupper($request['registration']),
-            'address_1' => $request['addressLine1'],
-            'address_2' => $request['addressLine2'],
-            'town' => $request['town'],
-            'postcode' => strtoupper($request['postcode']),
-            'fitting_address_1' => $request['fitting_addressLine1'],
-            'fitting_address_2' => $request['fitting_addressLine2'],
-            'fitting_town' => $request['fitting_town'],
-            'fitting_postcode' => strtoupper($request['fitting_postcode']),
-        ]);
+        $user = new User();
+        $user->firstname = $request['firstname'];
+        $user->lastname = $request['lastname'];
+        $user->email = $request['email'];
+        $user->phone = $request['phone'];
+        $user->registration = strtoupper($request['registration']);
+        $user->address_1 = $request['addressLine1'];
+        $user->town = $request['town'];
+        $user->postcode = strtoupper($request['postcode']);
+        $user->fitting_address_1 = $request['fitting_addressLine1'];
+        $user->fitting_town = $request['fitting_town'];
+        $user->fitting_postcode = strtoupper($request['fitting_postcode']);
+        $user->save();
 
         //create timeslot
-        $timeslot = Timeslot::create([
-            'user_id' => $user['id'],
-            'slot_from' => $request['timeslot']['from'],
-            'slot_to' => $request['timeslot']['to'],
-            'day' => $request['timeslot']['day'],
-            'month' => $request['timeslot']['month'],
-            'year' => $request['timeslot']['year'],
-            'price' => $request['timeslot']['price'],
-        ]);
+        $timeslot = new Timeslot();
+        $timeslot->user_id = $user->id;
+        $timeslot->slot_from = $request['timeslot']['from'];
+        $timeslot->slot_to = $request['timeslot']['to'];
+        $timeslot->day = $request['timeslot']['day'];
+        $timeslot->month = $request['timeslot']['month'];
+        $timeslot->year = $request['timeslot']['year'];
+        $timeslot->price = $request['timeslot']['price'];
+        $timeslot->save();
 
+        $cart = json_decode($request->input('cart'), true);
+
+        $tyre = Tyre::where('id', $cart['tyre']['id'])->first()->toArray();
+        $tyre_total = $cart['tyre']['quantity'] >= 4 ? number_format($cart['tyre']['quantity'] * $tyre['price_offer'], 2) : number_format($cart['tyre']['quantity'] * $tyre['price'], 2);
+
+        // calculate subtotal and number of items
+        $subtotal = 0;
+        $tyres = 0;
+
+        $subtotal += floatval($tyre_total);
+        $subtotal += $timeslot->price;
+
+
+        $fitting = ServiceFee::where('name', 'fitting_r' . $tyre['rim'])->first();
+        $callout = ServiceFee::where('name', 'callout_r' . $tyre['rim'])->first();
+        $disposal = ServiceFee::where('name', 'tyre_disposal')->first();
+
+        $total = ($subtotal + ($fitting->price * $cart['tyre']['quantity']) + $callout->price + ($disposal->price * $cart['tyre']['quantity'])) * 100;
+
+        $deposit_percentage = Configuration::where('key', 'deposit_percentage')->first()->value;
+
+        $total_later = round($total * ((100-$deposit_percentage)/100));
+        $total_to_pay = round($total * ($deposit_percentage/100));
 
         try {
             $user->createOrGetStripeCustomer();
 
             $payment = $user->charge(
-                $request->input('amount'),
+                $total_to_pay,
                 $request->input('payment_method_id')
             );
 
-            $payment = $payment->asStripePaymentIntent();
+//            $payment = $payment->asStripePaymentIntent();
+
 
             $order = $user->orders()
-                ->create([
-                    'transaction_id' => $payment->charges->data[0]->id,
-                    'total' => $payment->charges->data[0]->amount
+                ->make([
+                    'transaction_id' => $payment->id,
+                    'total' => $payment->amount,
+                    'remaining' => $total_later,
                 ]);
-
-            $cart = json_decode($request->input('cart'), true);
+            $order->save();
 
             $order->tyres()
                 ->attach($cart['tyre']['id'], ['quantity' => $cart['tyre']['quantity']]);
@@ -107,11 +131,31 @@ class PaymentController extends Controller
 
             $order->load('tyres');
 
-            // clear cart
-            $request->session()->forget('cart');
 
             Mail::to($request['email'])->send(new OrderMail($order['id']));
             Mail::to(config('mail.from.address'))->send(new OrderMail($order['id']));
+
+            // create order snapshot
+            $snapshot = OrderSnapshot::create([
+                'order_id' => $order->id,
+                'tyre' => json_encode($order['tyres']->toArray()[0]),
+                'services' => json_encode([
+                    'fitting' => $fitting->price,
+                    'callout' => $callout->price,
+                    'disposal' => $disposal->price,
+                ]),
+                'deposit_percentage' => $deposit_percentage,
+            ]);
+
+
+            // create invoice
+            $invoice = $this->generateInvoice($order);
+
+            $fileName = 'invoice_'.$order->id.'.pdf';
+            Storage::put('invoices/' . $fileName, $invoice->output());
+
+            // clear cart
+            $request->session()->forget('cart');
 
             return Redirect::to(URL::temporarySignedRoute('order-summary', now()->addMinutes(30), $order['id']));
 
@@ -130,46 +174,49 @@ class PaymentController extends Controller
         if(!$order){
             return Redirect::to('/');
         }
+        $orderSnapshot = OrderSnapshot::where('order_id', $orderId)->first();
+        if(!$orderSnapshot){
+            return Redirect::to('/');
+        }
+
+        $tyre = json_decode($orderSnapshot['tyre'], true);
+        $services = json_decode($orderSnapshot['services'], true);
 
         // get the tyres from session
-        $tyres = $order['tyres']->toArray();
         $user = $order->user;
         $timeslot = $user->timeslot;
 
         // calculate subtotal and number of items
         $subtotal = $timeslot['price'];
-        $items = 0;
 
-        foreach($tyres as $tyre) {
-            if($tyre['pivot']['quantity'] >= 4) {
-                $subtotal += ($tyre['pivot']['quantity'] * $tyre['price_offer']);
-            } else{
-                $subtotal += ($tyre['pivot']['quantity'] * $tyre['price']);
-            }
-            $items += $tyre['pivot']['quantity'];
+        if($tyre['pivot']['quantity'] >= 4) {
+            $subtotal += ($tyre['pivot']['quantity'] * $tyre['price_offer']);
+        } else{
+            $subtotal += ($tyre['pivot']['quantity'] * $tyre['price']);
         }
 
-        $fitting = ServiceFee::where('name', 'fitting_r' . $tyre['rim'])->first();
-        $callout = ServiceFee::where('name', 'callout_r' . $tyre['rim'])->first();
-        $disposal = ServiceFee::where('name', 'tyre_disposal')->first();
+        $fitting = $services['fitting'];
+        $callout = $services['callout'];
+        $disposal = $services['disposal'];
 
-        $total = $subtotal + ($fitting->price * $items) + $callout->price + ($disposal->price * $items);
+        $total = $subtotal + ($fitting * $tyre['pivot']['quantity']) + $callout + ($disposal * $tyre['pivot']['quantity']);
+        $deposit_percentage = $orderSnapshot['deposit_percentage'];
 
         return Inertia::render('Checkout/OrderSummary', [
             'order_summary' => $order,
             'summary' => [
-                'items' => $items,
+                'items' => $tyre['pivot']['quantity'],
                 'subtotal' => number_format($subtotal, 2),
-                'fitting' => number_format($items * $fitting->price, 2),
-                'fitting_cost' => number_format($fitting->price, 2),
-                'callout' => number_format($callout->price, 2),
-                'disposal' => number_format($items * $disposal->price, 2),
-                'disposal_cost' => number_format($disposal->price, 2),
+                'fitting' => number_format($tyre['pivot']['quantity'] * $fitting, 2),
+                'fitting_cost' => number_format($fitting, 2),
+                'callout' => number_format($callout, 2),
+                'disposal' => number_format($tyre['pivot']['quantity'] * $disposal, 2),
+                'disposal_cost' => number_format($disposal, 2),
                 'total' => number_format($total, 2),
-                'total_later' => number_format(($total * 0.75), 2),
-                'total_today' => number_format(($total * 0.25), 2),
-                'total_later_pence' => round(($total * 75)),
-                'total_today_pence' => round(($total * 25)),
+                'total_later' => number_format(($total * ((100-$deposit_percentage) / 100)), 2),
+                'total_today' => number_format(($total * ($deposit_percentage / 100)), 2),
+                'total_later_pence' => round(($total * (100-$deposit_percentage))),
+                'total_today_pence' => round(($total * $deposit_percentage)),
                 'txn_id' => $order['transaction_id']
             ],
             'user' => [
@@ -189,8 +236,49 @@ class PaymentController extends Controller
                 'year' => $timeslot['year'],
                 'price' => $timeslot['price'],
             ],
-            'cart' => $tyres,
+            'cart' => $tyre,
         ]);
+    }
+
+    function generateInvoice($order) {
+        $tyre = $order['tyres']->toArray()[0];
+        $user = $order->user;
+        $timeslot = $user->timeslot;
+
+        // calculate subtotal and number of items
+        $subtotal = $timeslot['price'];
+
+        $qty = $tyre['pivot']['quantity'];
+        if($qty >= 4) {
+            $subtotal += ($qty * $tyre['price_offer']);
+        } else{
+            $subtotal += ($qty * $tyre['price']);
+        }
+
+        $fitting = ServiceFee::where('name', 'fitting_r' . $tyre['rim'])->first();
+        $callout = ServiceFee::where('name', 'callout_r' . $tyre['rim'])->first();
+        $disposal = ServiceFee::where('name', 'tyre_disposal')->first();
+
+        $total = $subtotal + ($fitting->price * $qty) + $callout->price + ($disposal->price * $qty);
+
+        $paid = number_format(($order->total / 100), 2);
+        $remaining = $total - $paid;
+
+        $invoice = PDF::loadView('invoice', [
+            'tyre' => $tyre,
+            'order_id' => 55,//$order->id,
+            'order_date' => $order->created_at->format('d/m/Y'),
+            'user' => $user,
+            'timeslot' => $timeslot,
+            'fitting' => $fitting->price,
+            'callout' => $callout->price,
+            'disposal' => $disposal->price,
+            'total' => number_format($total, 2),
+            'paid' => number_format($paid, 2),
+            'remaining' => number_format($remaining, 2)
+        ]);
+
+        return $invoice;
     }
 
     function checkPostcodeIsValid(Request $request) {

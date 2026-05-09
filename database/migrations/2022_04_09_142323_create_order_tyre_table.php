@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('order_tyre', function (Blueprint $table) {
-            $table->integer('order_id');
+            $table->integer('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->integer('tyre_id');
             $table->integer('quantity')->default(1);
         });

@@ -42,7 +42,8 @@ class HandleInertiaRequests extends Middleware
                 'errors' => [
                     'postcode' => fn () => $request->session()->get('flash.errors.postcode'),
                     'timeslot' => fn () => $request->session()->get('flash.errors.timeslot'),
-                    'auth' => fn () => $request->session()->get('flash.errors.auth')
+                    'auth' => fn () => $request->session()->get('flash.errors.auth'),
+                    'registration' => fn () => $request->session()->get('flash.errors.registration'),
                 ],
                 'success' => [
                     'cart' => [
@@ -52,7 +53,7 @@ class HandleInertiaRequests extends Middleware
                 ],
                 'checkout' => [
                     'timeslots' => fn () => $request->session()->get('flash.checkout.timeslots'),
-                ]
+                ],
             ],
             'cart' => [
                 'tyre' => fn () => $request->session()->get('cart.tyre'),

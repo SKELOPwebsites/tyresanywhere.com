@@ -3,7 +3,26 @@
         <title>Orders</title>
     </Head>
 
-    <Container class="mt-12">
+    <div class="mt-4">
+        <div class="bg-indigo-400 grid grid-cols-24 w-full h-6 border border-gray-500">
+            <div class="col-span-1 flex items-center justify-center border-r border-gray-500 h-full text-xs font-bold"><span>#</span></div>
+            <div class="col-span-1 flex items-center justify-center border-r border-gray-500 h-full text-xs font-bold"><span>Tyre #</span></div>
+            <div class="col-span-3 flex items-center justify-center border-r border-gray-500 h-full text-xs font-bold"><span>Date & Time</span></div>
+            <div class="col-span-1 flex items-center justify-center border-r border-gray-500 h-full text-xs font-bold"><span>Qty</span></div>
+            <div class="col-span-5 flex items-center justify-center border-r border-gray-500 h-full text-xs font-bold"><span>Customer</span></div>
+            <div class="col-span-3 flex items-center justify-center border-r border-gray-500 h-full text-xs font-bold"><span>Fitting Address</span></div>
+            <div class="col-span-2 flex items-center justify-center border-r border-gray-500 h-full text-xs font-bold"><span>Fitting Town</span></div>
+            <div class="col-span-2 flex items-center justify-center border-r border-gray-500 h-full text-xs font-bold"><span>Fitting Postcode</span></div>
+            <div class="col-span-3 flex items-center justify-center border-r border-gray-500 h-full text-xs font-bold"><span>Transaction Date</span></div>
+            <div class="col-span-1 flex items-center justify-center border-r border-gray-500 h-full text-xs font-bold"><span>Paid</span></div>
+            <div class="col-span-2 flex items-center justify-center border-gray-500 h-full text-xs font-bold"><span>Remaining</span></div>
+        </div>
+        <div v-click-outside="() => selectOrder(null)">
+            <AdminOrder v-for="(order, index) in orders" :order="order" :index="index" :key="index" @selectOrder="selectOrder" :selectedOrder="selectedOrder"></AdminOrder>
+        </div>
+    </div>
+
+    <div class="hidden mt-12 px-10">
         <div v-for="order in orders">
             <div @click="selectOrder(order.id)" class="w-full mt-2 px-2 py-3 cursor-pointer flex items-center justify-start border border-gray-300 rounded-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" :class="{'h-6 w-6 mr-2': true, 'rotate-180': selectedOrder === order.id}" viewBox="0 0 20 20" fill="currentColor">
@@ -20,88 +39,22 @@
                     </a>
                 </div>
             </div>
-
-            <div :class="{'max-h-0 overflow-hidden transition-all duration-300 ease-in-out': true, 'max-h-[600px]': selectedOrder === order.id}">
-                <table class="flex flex-col w-full text-sm px-3">
-                    <tbody class="md:space-y-0 space-y-4 text-left">
-                    <tr class="flex md:flex-row flex-col">
-                        <th class="border px-4 py-2 md:w-40 md:shrink-0">First Name</th>
-                        <td class="border px-2 py-2 md:grow md:text-left text-center">{{ order.user.firstname }}</td>
-                    </tr>
-                    <tr class="flex md:flex-row flex-col">
-                        <th class="border px-4 py-2 md:w-40 md:shrink-0">Last Name</th>
-                        <td class="border px-2 py-2 md:grow md:text-left text-center">{{ order.user.lastname }}</td>
-                    </tr>
-                    <tr class="flex md:flex-row flex-col">
-                        <th class="border px-4 py-2 md:w-40 md:shrink-0">Email</th>
-                        <td class="border px-2 py-2 md:grow md:text-left text-center">{{ order.user.email }}</td>
-                    </tr>
-                    <tr class="flex md:flex-row flex-col">
-                        <th class="border px-4 py-2 md:w-40 md:shrink-0">Phone</th>
-                        <td class="border px-2 py-2 md:grow md:text-left text-center">{{ order.user.phone }}</td>
-                    </tr>
-                    <tr class="flex md:flex-row flex-col">
-                        <th class="border px-4 py-2 md:w-40 md:shrink-0">Car Registration</th>
-                        <td class="border px-2 py-2 md:grow md:text-left text-center uppercase">{{ order.user.registration }}</td>
-                    </tr>
-                    <tr class="flex md:flex-row flex-col">
-                        <th class="border px-4 py-2 md:w-40 md:shrink-0">Billing Address 1</th>
-                        <td class="border px-2 py-2 md:grow md:text-left text-center">{{ order.user.address_1 }}</td>
-                    </tr>
-                    <tr class="flex md:flex-row flex-col">
-                        <th class="border px-4 py-2 md:w-40 md:shrink-0">Billing Address 2</th>
-                        <td class="border px-2 py-2 md:grow md:text-left text-center">{{ order.user.address_2 }}</td>
-                    </tr>
-                    <tr class="flex md:flex-row flex-col">
-                        <th class="border px-4 py-2 md:w-40 md:shrink-0">Billing Town</th>
-                        <td class="border px-2 py-2 md:grow md:text-left text-center">{{ order.user.town }}</td>
-                    </tr>
-                    <tr class="flex md:flex-row flex-col">
-                        <th class="border px-4 py-2 md:w-40 md:shrink-0">Billing Postcode</th>
-                        <td class="border px-2 py-2 md:grow md:text-left text-center uppercase">{{ order.user.postcode }}</td>
-                    </tr>
-                    <tr class="flex md:flex-row flex-col">
-                        <th class="border px-4 py-2 md:w-40 md:shrink-0">Fitting Address 1</th>
-                        <td class="border px-2 py-2 md:grow md:text-left text-center">{{ order.user.fitting_address_1 }}</td>
-                    </tr>
-                    <tr class="flex md:flex-row flex-col">
-                        <th class="border px-4 py-2 md:w-40 md:shrink-0">Fitting Address 2</th>
-                        <td class="border px-2 py-2 md:grow md:text-left text-center">{{ order.user.fitting_address_2 }}</td>
-                    </tr>
-                    <tr class="flex md:flex-row flex-col">
-                        <th class="border px-4 py-2 md:w-40 md:shrink-0">Fitting Town</th>
-                        <td class="border px-2 py-2 md:grow md:text-left text-center">{{ order.user.fitting_town }}</td>
-                    </tr>
-                    <tr class="flex md:flex-row flex-col">
-                        <th class="border px-4 py-2 md:w-40 md:shrink-0">Fitting Postcode</th>
-                        <td class="border px-2 py-2 md:grow md:text-left text-center uppercase">{{ order.user.fitting_postcode }}</td>
-                    </tr>
-                    <tr class="flex md:flex-row flex-col">
-                        <th class="border px-4 py-2 md:w-40 md:shrink-0">Timeslot</th>
-                        <td class="border px-2 py-2 md:grow md:text-left text-center">{{ order.user.timeslot.slot_from }} - {{ order.user.timeslot.slot_to }} | {{ order.user.timeslot.day }}/{{ order.user.timeslot.month }}/{{ order.user.timeslot.year }}</td>
-                    </tr>
-                    <tr class="flex md:flex-row flex-col">
-                        <th class="border px-4 py-2 md:w-40 md:shrink-0">Paid</th>
-                        <td class="border px-2 py-2 md:grow md:text-left text-center">£{{ Math.round((order.total / 100) * 100) / 100 }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
         </div>
-    </Container>
+    </div>
 </template>
 
 <script>
-import AdminLayout from "../../Shared/AdminLayout.vue"
+import AdminLayout from "/resources/js/Shared/Layouts/AdminLayout.vue"
 export default {
     layout: AdminLayout
 }
 </script>
 
 <script setup>
+import AdminOrder from "/resources/js/Shared/Admin/AdminOrder.vue"
 import { Head } from "@inertiajs/vue3"
 import { ref } from "vue";
-import Container from "../../Shared/Container.vue";
+
 
 defineProps({
     orders: {
@@ -113,7 +66,7 @@ defineProps({
 const selectedOrder = ref(null);
 
 function selectOrder(id) {
-    selectedOrder.value === id ? selectedOrder.value = null : selectedOrder.value = id
+    selectedOrder.value = id;
 }
 
 function stopPropagation(e) {

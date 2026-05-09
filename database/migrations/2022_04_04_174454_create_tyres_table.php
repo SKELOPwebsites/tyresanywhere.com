@@ -28,9 +28,11 @@ return new class extends Migration
             $table->string('usage');
             $table->boolean('extra_load')->default(false);
             $table->string('season');
-            $table->string('header');
             $table->decimal('price', 9);
             $table->decimal('price_offer', 9);
+            $table->boolean('commercial')->default(false);
+            $table->boolean('runflat')->default(false);
+            $table->boolean('enabled')->default(true);
         });
     }
 

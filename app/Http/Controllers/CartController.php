@@ -40,7 +40,7 @@ class CartController extends Controller
         return Inertia::render('Checkout/Cart', [
             'cart' => $tyre,
             'subtotal' => number_format($subtotal, 2),
-            'items' => $items,
+            'items' => $items
         ]);
     }
 

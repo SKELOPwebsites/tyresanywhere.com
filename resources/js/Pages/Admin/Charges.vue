@@ -2,7 +2,7 @@
     <Head>
         <title>Manage Charges</title>
     </Head>
-    <Container>
+    <div class="container">
         <div class="lg:w-1/3 w-full mx-auto pt-8">
             <p class="font-semibold text-3xl text-center mb-8">Manage Charges</p>
 
@@ -10,7 +10,7 @@
                 <AdminFee v-for="fee in service_fees" :fee="fee" @save="(id, form) => submit(id, form)"></AdminFee>
             </div>
         </div>
-    </Container>
+    </div>
 
     <Transition name="success">
         <div v-show="success" v-text="success" class="fixed md:bottom-8 md:right-8 bottom-4 sm:right-4 sm:left-auto left-1/2 sm:translate-x-0 -translate-x-1/2 sm:px-4 px-2 py-2 bg-green-500/80 text-white sm:text-sm text-xs whitespace-nowrap rounded-lg font-semibold"></div>
@@ -20,16 +20,16 @@
 </template>
 
 <script>
-import AdminLayout from "../../Shared/AdminLayout.vue"
+import AdminLayout from "/resources/js/Shared/Layouts/AdminLayout.vue"
 export default {
     layout: AdminLayout
 }
 </script>
 
 <script setup>
-import { useForm, Head, Link, usePage } from "@inertiajs/vue3"
-import Container from "../../Shared/Container.vue";
-import AdminFee from "../../Shared/AdminFee.vue";
+import { useForm, Link, Head, usePage } from "@inertiajs/vue3"
+
+import AdminFee from "/resources/js/Shared/Admin/AdminFee.vue";
 import { computed, watch } from "vue";
 
 const props = defineProps({
@@ -58,7 +58,7 @@ watch(success, () => {
 })
 
 function submit(id, form) {
-    form.put('/admin/charges/' + id, {
+    form.put('/admin/service-charges/' + id, {
         preserveScroll: true,
         preserveState: false,
         onSuccess: () => {

@@ -10,4 +10,6 @@ class TyreBrand extends Model
     use HasFactory;
 
     protected $table = 'tyre_brands';
+
+    protected $guarded = [];
 }
